@@ -107,5 +107,17 @@ function kittenMessage(recipientId, text) {
 
 
 
-
+function sendHiMessage(recipientID) {
+    var messageData = {
+        recipient: {
+            id: recipientID
+        }, 
+        message: {
+            text: `
+            Olá! Sou o chatbot do SIGARRA e esotu aqui para responder às tuas perguntas!
+                  `
+        }
+    }
+    sendMessage(recipientID, message);
+}
 
