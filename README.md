@@ -1,4 +1,4 @@
-# Configurar o Bot
+# Como configurar o Bot
 
 Para configurar o bot precisamos de uma maneira de o conectar aos servidores 
 do Facebook. Para isso vamos usar Node.JS e o Herku. Alternativamente, podemos usar 
@@ -107,7 +107,7 @@ $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
 ```
 
 + Para utilizadores do Windows:
-A sério que estás a usar Windows?!?!
+Oh meu... por favor...
 
 
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha:
