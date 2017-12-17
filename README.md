@@ -34,11 +34,11 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 ## Instalar pacotes úteis do Node
 
-        ```bash
-        $ npm install express body-parser request --save
-        ```
+    ```bash
+    $ npm install express body-parser request --save
+    ```
 
-        Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
+    Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
 ## Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
@@ -70,30 +70,30 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 A seguir vamos copiar o seguinte bloco de código:
 
-    ```javascript
-    var express = require('express');  
-    var bodyParser = require('body-parser');  
-    var request = require('request');  
-    var app = express();
-    
-    app.use(bodyParser.urlencoded({extended: false}));  
-    app.use(bodyParser.json());  
-    app.listen((process.env.PORT || 3000));
-    
-    // Server frontpage
-    app.get('/', function (req, res) {  
-        res.send('This is TestBot Server');
-    });
-    
-    // Facebook Webhook
-    app.get('/webhook', function (req, res) {  
-        if (req.query['hub.verify_token'] === 'niaefeup') {
-            res.send(req.query['hub.challenge']);
-        } else {
-            res.send('Invalid verify token');
-        }
-    });
-    ```
+        ```javascript
+        var express = require('express');  
+        var bodyParser = require('body-parser');  
+        var request = require('request');  
+        var app = express();
+        
+        app.use(bodyParser.urlencoded({extended: false}));  
+        app.use(bodyParser.json());  
+        app.listen((process.env.PORT || 3000));
+        
+        // Server frontpage
+        app.get('/', function (req, res) {  
+            res.send('This is TestBot Server');
+        });
+        
+        // Facebook Webhook
+        app.get('/webhook', function (req, res) {  
+            if (req.query['hub.verify_token'] === 'niaefeup') {
+                res.send(req.query['hub.challenge']);
+            } else {
+                res.send('Invalid verify token');
+            }
+        });
+        ```
 
 ## Griar um repositório Git 
 Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
