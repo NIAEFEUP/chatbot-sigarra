@@ -227,11 +227,11 @@ a seguinte função, que devemos colar no final do ficheiro.
     Por cada pedido feito pelo facebook ao servidor, precisamos sempre da mensagem e do token de accesso.
     Vamos agora guardar o ficheiro **index.js**, fazer commit e dar deploy no nosso servidor do Heroku: 
 
-    ```bash
-    $ git add .
-    $ git commit -m 'Create Echo Bot'
-    $ git push heroku master
-    ```
+        ```bash
+        $ git add .
+        $ git commit -m 'Create Echo Bot'
+        $ git push heroku master
+        ```
 
     Podemos agora enviar uma mensagem ao bot! Para isso procuramos o nome do bot no Messenger e 
     enviamos a mensagem.
