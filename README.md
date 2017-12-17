@@ -112,11 +112,11 @@ Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depo
 
   + Para utilizadores do Ubuntu: 
 
-
+    ```
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+    ```
 
-
-  + Para utilizadores do Windows: Oh meu... por favor...
+  + Para utilizadores do Windows: Oh meu... por favor... 
 
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
    
