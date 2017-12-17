@@ -110,11 +110,11 @@ A seguir fazemos push para o server do Heroku (substituam o appname por um nome 
     $ git push heroku master
     https://appname.herokuapp.com/ deployed to Heroku  
     ```
-
 8. Criar página no Facebook
 Para criar a página acedemos a este link: https://www.facebook.com/pages/create/.
 O tipo da página é irrelevante, já que só estamos a usar esta página para testes 
 (organização, instituição, software... é indiferente).
+
 
 9. Criar Facebook App
 Para criar a app, acedemos a este link: https://developers.facebook.com/quickstarts/, clicamos em 
@@ -124,6 +124,8 @@ Para criar a app, acedemos a este link: https://developers.facebook.com/quicksta
     Contact email -> email da vossa conta
     ```
 Após isso, na Dashboard, vamos a Product Settings -> Add Product section -> Get started with Messenger.
+
+
 10. Gerar o Page Access Token e configurar o webhook 
 Na aba *Messenger* da página da nossa aplicação do Facebook, na secção *Token Generation*, 
 escolhemos a página que queremos associar à app. Após isso será gerado o PAGE_ACCESS_TOKEN. Vamos 
