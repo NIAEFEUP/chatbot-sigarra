@@ -87,6 +87,7 @@ Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses fic
     node_modules/  
 
 Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
+
     ```bash
     $ git init
     $ git add .
