@@ -25,40 +25,42 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
     ```
 
 ## Criar diretório do projeto e configurar servidor da aplicação
-    ```bash
-    $ mkdir chatbot_sigarra
-    $ cd chatbot_sigarra/
-    $ npm init
-    ```
+    
+```bash
+$ mkdir chatbot_sigarra
+$ cd chatbot_sigarra/
+$ npm init
+```
+
 ## Instalar pacotes úteis do Node
 
-    ```bash
-    $ npm install express body-parser request --save
-    ```
+```bash
+$ npm install express body-parser request --save
+```
 
 Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
 ## Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
-    ```javascript
-    {
-      "name": "testbot",
-      "version": "1.0.0",
-      "description": "Chatbot Sigarra Server App",
-      "main": "index.js",
-      "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node index.js"
-      },
-      "author": "NIAEFEUP",
-      "license": "ISC",
-      "dependencies": {
-        "body-parser": "^1.15.0",
-        "express": "^4.13.4",
-        "request": "^2.72.0"
-      }
-    }
-    ```
+```javascript
+{
+  "name": "testbot",
+  "version": "1.0.0",
+  "description": "Chatbot Sigarra Server App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "NIAEFEUP",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "request": "^2.72.0"
+  }
+}
+```
 
 ## Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
 
