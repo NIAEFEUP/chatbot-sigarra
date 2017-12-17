@@ -84,16 +84,17 @@ A seguir vamos copiar o seguinte bloco de código:
 6. Griar um repositório Git 
 
 Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
-    
+    ```
     node_modules/  
+    ```
 
 Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
 
-```bash
-$ git init
-$ git add .
-$ git commit -m 'Configuração do webhook'
-```
+    ```bash
+    $ git init
+    $ git add .
+    $ git commit -m 'Configuração do webhook'
+    ```
 
 7. Configurar o Heroku
 Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
@@ -114,14 +115,14 @@ Oh meu... por favor...
 
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
 
-        ```bash
-        $ heroku login
-        $ heroku create appname
-        creating app... done, stack is cedar-14  
-        https://appname.herokuapp.com/ | https://git.heroku.com/appname.git  
-        $ git push heroku master
-        https://appname.herokuapp.com/ deployed to Heroku  
-        ```
+    ```bash
+    $ heroku login
+    $ heroku create appname
+    creating app... done, stack is cedar-14  
+    https://appname.herokuapp.com/ | https://git.heroku.com/appname.git  
+    $ git push heroku master
+    https://appname.herokuapp.com/ deployed to Heroku  
+    ```
 
 8. Criar página no Facebook
 Para criar a página acedemos a este link: https://www.facebook.com/pages/create/.
@@ -157,6 +158,7 @@ A maneira mais simples de o fazer é correr o seguinte código no terminal, subs
     $ curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=PAGE_ACCESS_TOKEN"
     ```
 Se tudo correr bem, obtemos a seguinte resposta do servidor: 
+
     ```bash
     {"success": true}
     ```
