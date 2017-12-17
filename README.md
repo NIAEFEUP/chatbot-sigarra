@@ -63,7 +63,6 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
     ```
 
 ## Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
-
     ```bash
     $ touch index.js
     ```
@@ -108,7 +107,6 @@ Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit:
     $ git commit -m 'Configuração do webhook'
     ```
 ## Configurar o Heroku
-
 Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
 
   + Para utilizadores do macOS, usando o Homebrew:
