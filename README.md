@@ -10,12 +10,12 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 * Instalar o Node
 
-  * Para utilizadores de macOS, utilizando o Homebrew:
+  + Para utilizadores de macOS, utilizando o Homebrew:
 
 ```bash
 $ brew install node
 ```
-  * Para utilizadores de Linux, usando o gestor de pacotes **apt**:
+  + Para utilizadores de Linux, usando o gestor de pacotes **apt**:
 
 ```bash
 $ sudo apt-get update
@@ -28,7 +28,7 @@ $ mkdir chatbot_sigarra
 $ cd chatbot_sigarra/
 $ npm init
 ```
-+ Instalar pacotes úteis do Node
+  + Instalar pacotes úteis do Node
 
 ```bash
 $ npm install express body-parser request --save
