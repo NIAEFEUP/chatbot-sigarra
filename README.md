@@ -173,7 +173,6 @@ Se tudo correr bem, obtemos a seguinte resposta do servidor:
     {"success": true}
 
 
-
 ## Definir o PAGE_ACCESS_TOKEN no Heroku
 Na página da nossa app no site do Heroku, clicamos em *Settings* e depois em *Config Variable*. 
 Na primeira caixa preenchemos com *PAGE_ACCESS_TOKEN* e na segunda com o token gerado.
