@@ -150,7 +150,9 @@ Após isso, na Dashboard, vamos a Product Settings -> Add Product section -> Get
 
 Na aba *Messenger* da página da nossa aplicação do Facebook, na secção *Token Generation*, escolhemos a página que queremos associar à app. 
 
+
 Após isso será gerado o PAGE_ACCESS_TOKEN. Vamos guardar este código para o usar a seguir.
+
 
 Na secção *Webhooks*, clicamos em *Setup webhooks*, colamos o URL que guardámos (não esquecer de colocar HTTPS no início do endereço!), o verify token (que em cima definimos como *niaefeup*) e selecionamos as seguintes checkboxes: *message_deliveries*, . 
 
