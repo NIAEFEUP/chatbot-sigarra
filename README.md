@@ -38,7 +38,7 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
         $ npm install express body-parser request --save
         ```
 
-    Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
+        Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
 ## Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
