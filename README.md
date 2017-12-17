@@ -101,7 +101,6 @@ Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depo
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     ```
 + Para utilizadores do Windows: Oh meu... por favor...
-
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
     ```bash
     $ heroku login
@@ -115,49 +114,35 @@ A seguir fazemos push para o server do Heroku (substituam o appname por um nome 
 Para criar a página acedemos a este link: https://www.facebook.com/pages/create/.
 O tipo da página é irrelevante, já que só estamos a usar esta página para testes 
 (organização, instituição, software... é indiferente).
-
-
 9. Criar Facebook App
 Para criar a app, acedemos a este link: https://developers.facebook.com/quickstarts/, clicamos em 
 "basic setup" e preenchemos os campos com a seguinte informação:
-
-Display Name -> nome da app
-Contact email -> email da vossa conta
-
+    Display Name -> nome da app
+    Contact email -> email da vossa conta
 Após isso, na Dashboard, vamos a Product Settings -> Add Product section -> Get started with Messenger.
-
-
 10. Gerar o Page Access Token e configurar o webhook 
 Na aba *Messenger* da página da nossa aplicação do Facebook, na secção *Token Generation*, 
 escolhemos a página que queremos associar à app. Após isso será gerado o PAGE_ACCESS_TOKEN. Vamos 
 guardar este código para o usar a seguir.
-
 Na secção *Webhooks*, clicamos em *Setup webhooks*, colamos o URL que guardámos (não esquecer de colocar 
 HTTPS no início do endereço!), o verify token (que em cima definimos como *niaefeup*) e selecionamos as seguintes checkboxes: *message_deliveries*, . Por fim clicamos em "Verify" e depois "Save".
-
 NOTA: O webhook precisa de ser acessível via HTTPS, por isso precisaremos de um certificado para o 
 domínio na altura de dar deploy no servidor do NI. Podemos fazê-lo facilmente usando o **nginx** e o 
 **Let's Encrypt**, caso o servidor ainda não o tenha.
-
 11. Subscrever a nossa app à página 
 A maneira mais simples de o fazer é correr o seguinte código no terminal, substituindo *PAGE_ACCESS_TOKEN* pelo token que gerámos: 
     ```bash
     $ curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=PAGE_ACCESS_TOKEN"
     ```
 Se tudo correr bem, obtemos a seguinte resposta do servidor: 
-
     ```bash
     {"success": true}
     ```
-
 12. Definir o PAGE_ACCESS_TOKEN no Heroku
 Na página da nossa app no site do Heroku, clicamos em *Settings* e depois em *Config Variable*. 
 Na primeira caixa preenchemos com *PAGE_ACCESS_TOKEN* e na segunda com o token gerado.
-
-
-
 13. Criar um bot que faça echo do input que recebe
-+ Se tudo correu bem, estamos agora prontos para criar o bot.
+Se tudo correu bem, estamos agora prontos para criar o bot.
 
 Começamos por adicionar a seguinte função no final do ficheiro **index.js**: 
 
