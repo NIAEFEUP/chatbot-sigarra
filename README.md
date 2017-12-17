@@ -8,7 +8,6 @@ do Facebook. Para isso vamos usar Node.JS e o Herku. Alternativamente, podemos u
 o nosso próprio servidor, ou até mesmo projetá-lo na web usando o 
 **localtunnel** ou o **ngrok**.
 
-
 1. Instalar o Node
 * Para utilizadores de macOS, utilizando o Homebrew:
 ```bash
