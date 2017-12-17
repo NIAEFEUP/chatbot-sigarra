@@ -42,25 +42,25 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 ## Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
-```javascript
-{
-  "name": "testbot",
-  "version": "1.0.0",
-  "description": "Chatbot Sigarra Server App",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
-  },
-  "author": "NIAEFEUP",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.15.0",
-    "express": "^4.13.4",
-    "request": "^2.72.0"
-  }
-}
-```
+        ```javascript
+        {
+          "name": "testbot",
+          "version": "1.0.0",
+          "description": "Chatbot Sigarra Server App",
+          "main": "index.js",
+          "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1",
+            "start": "node index.js"
+          },
+          "author": "NIAEFEUP",
+          "license": "ISC",
+          "dependencies": {
+            "body-parser": "^1.15.0",
+            "express": "^4.13.4",
+            "request": "^2.72.0"
+          }
+        }
+        ```
 
 ## Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
 
