@@ -135,6 +135,8 @@ HTTPS no início do endereço!), o verify token (que em cima definimos como *nia
 NOTA: O webhook precisa de ser acessível via HTTPS, por isso precisaremos de um certificado para o 
 domínio na altura de dar deploy no servidor do NI. Podemos fazê-lo facilmente usando o **nginx** e o 
 **Let's Encrypt**, caso o servidor ainda não o tenha.
+
+
 11. Subscrever a nossa app à página 
 A maneira mais simples de o fazer é correr o seguinte código no terminal, substituindo *PAGE_ACCESS_TOKEN* pelo token que gerámos: 
     ```bash
@@ -144,10 +146,16 @@ Se tudo correr bem, obtemos a seguinte resposta do servidor:
     ```bash
     {"success": true}
     ```
+
+
 12. Definir o PAGE_ACCESS_TOKEN no Heroku
 Na página da nossa app no site do Heroku, clicamos em *Settings* e depois em *Config Variable*. 
 Na primeira caixa preenchemos com *PAGE_ACCESS_TOKEN* e na segunda com o token gerado.
+
+
 13. Criar um bot que faça echo do input que recebe
+
+
 Se tudo correu bem, estamos agora prontos para criar o bot.
 
 Começamos por adicionar a seguinte função no final do ficheiro **index.js**: 
