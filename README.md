@@ -15,7 +15,7 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
         ```bash
         $ brew install node
         ```
-        
+
     + Para utilizadores de Linux, usando o gestor de pacotes **apt**:
  
         ```bash
@@ -25,17 +25,17 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 * Criar diretório do projeto e configurar servidor da aplicação
 
-```bash
-$ mkdir chatbot_sigarra
-$ cd chatbot_sigarra/
-$ npm init
-```
-+ Instalar pacotes úteis do Node
+    ```bash
+    $ mkdir chatbot_sigarra
+    $ cd chatbot_sigarra/
+    $ npm init
+    ```
+* Instalar pacotes úteis do Node
 
-```bash
-$ npm install express body-parser request --save
-```
-Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
+    ```bash
+    $ npm install express body-parser request --save
+    ```
+    Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
 * Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
