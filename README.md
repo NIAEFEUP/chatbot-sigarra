@@ -13,8 +13,9 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 + Para utilizadores de macOS, utilizando o Homebrew:
 
+    ```
     $ brew install node
-
+    ```
 
 + Para utilizadores de Linux, usando o gestor de pacotes **apt**:
 
@@ -25,16 +26,17 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 ## Criar diretório do projeto e configurar servidor da aplicação
 
+    ```
     $ mkdir chatbot_sigarra
     $ cd chatbot_sigarra/
     $ npm init
-
+    ```
 
 ## Instalar pacotes úteis do Node
 
-
+    ```
     $ npm install express body-parser request --save
-
+    ```
 
 Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
@@ -62,10 +64,11 @@ Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta 
 
 ## Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
 
+    ```
     $ touch index.js
+    ```
 
 A seguir vamos copiar o seguinte bloco de código:
-
 
     var express = require('express');  
     var bodyParser = require('body-parser');  
