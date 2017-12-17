@@ -4,6 +4,7 @@ SIGARRA. Permite obter diversas informações presentes no website fe.up.pt de m
 
 Made by NIAEFEUP
 
+
 # Como configurar o Bot
 Para configurar o bot precisamos de uma maneira de o conectar aos servidores 
 do Facebook. Para isso vamos usar Node.JS e o Herku. Alternativamente, podemos usar 
