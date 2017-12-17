@@ -26,23 +26,23 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 ## Criar diretório do projeto e configurar servidor da aplicação
    
-    ```bash
+
     $ mkdir chatbot_sigarra
     $ cd chatbot_sigarra/
     $ npm init
-    ```
+
 
 ## Instalar pacotes úteis do Node
 
-    ```bash
+
     $ npm install express body-parser request --save
-    ```
+
 
     Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
 ## Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
-        ```javascript
+
         {
           "name": "testbot",
           "version": "1.0.0",
@@ -60,17 +60,17 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
             "request": "^2.72.0"
           }
         }
-        ```
+
 
 ## Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
 
-    ```bash
+
     $ touch index.js
-    ```
 
-    A seguir vamos copiar o seguinte bloco de código:
 
-    ```javascript
+A seguir vamos copiar o seguinte bloco de código:
+
+
     var express = require('express');  
     var bodyParser = require('body-parser');  
     var request = require('request');  
@@ -93,7 +93,7 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
             res.send('Invalid verify token');
         }
     });
-    ```
+
 
 ## Griar um repositório Git 
 Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
@@ -102,38 +102,38 @@ Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses fic
 
 Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
 
-    ```bash
+
     $ git init
     $ git add .
     $ git commit -m 'Configuração do webhook'
-    ```
+
 ## Configurar o Heroku
 Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
 
   + Para utilizadores do macOS, usando o Homebrew:
 
-    ```bash
+
     $ brew install heroku/brew/heroku
-    ```
+
 
   + Para utilizadores do Ubuntu: 
     
-    ```bash
+
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-    ```
+
 
   + Para utilizadores do Windows: Oh meu... por favor...
 
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
    
-    ```bash
+
     $ heroku login
     $ heroku create appname
     creating app... done, stack is cedar-14  
     https://appname.herokuapp.com/ | https://git.heroku.com/appname.git  
     $ git push heroku master
     https://appname.herokuapp.com/ deployed to Heroku  
-    ```
+
 
 ## Criar página no Facebook
 
@@ -146,10 +146,10 @@ O tipo da página é irrelevante, já que só estamos a usar esta página para t
 Para criar a app, acedemos a este link: https://developers.facebook.com/quickstarts/, clicamos em 
 "basic setup" e preenchemos os campos com a seguinte informação:
 
-    ```
+
     Display Name -> nome da app
     Contact email -> email da vossa conta
-    ```
+
 
 Após isso, na Dashboard, vamos a Product Settings -> Add Product section -> Get started with Messenger.
 
@@ -167,13 +167,13 @@ domínio na altura de dar deploy no servidor do NI. Podemos fazê-lo facilmente 
 
 ## Subscrever a nossa app à página 
 A maneira mais simples de o fazer é correr o seguinte código no terminal, substituindo *PAGE_ACCESS_TOKEN* pelo token que gerámos: 
-    ```bash
+
     $ curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=PAGE_ACCESS_TOKEN"
-    ```
+
 Se tudo correr bem, obtemos a seguinte resposta do servidor: 
-    ```bash
+
     {"success": true}
-    ```
+
 
 
 ## Definir o PAGE_ACCESS_TOKEN no Heroku
@@ -186,7 +186,7 @@ Se tudo correu bem, estamos agora prontos para criar o bot.
 Começamos por adicionar a seguinte função no final do ficheiro **index.js**: 
 
 
-    ```javascript
+
     // handler receiving messages
     app.post('/webhook', function (req, res) {  
         var events = req.body.entry[0].messaging;
@@ -198,14 +198,14 @@ Começamos por adicionar a seguinte função no final do ficheiro **index.js**:
         }
         res.sendStatus(200);
     });
-    ```
+
 
 
 O post handler percorre todas as mensagens recebidas e faz echo delas se existirem, usando para isso 
 a seguinte função, que devemos colar no final do ficheiro.
 
 
-    ```javascript
+
     // generic function sending messages
     function sendMessage(recipientId, message) {  
         request({
@@ -224,17 +224,17 @@ a seguinte função, que devemos colar no final do ficheiro.
             }
         });
     };
-    ```
+
 
 
 Por cada pedido feito pelo facebook ao servidor, precisamos sempre da mensagem e do token de accesso.
 Vamos agora guardar o ficheiro **index.js**, fazer commit e dar deploy no nosso servidor do Heroku: 
 
-    ```bash
+
     $ git add .
     $ git commit -m 'Create Echo Bot'
     $ git push heroku master
-    ```
+
 
 Podemos agora enviar uma mensagem ao bot! Para isso procuramos o nome do bot no Messenger e 
 enviamos a mensagem.
