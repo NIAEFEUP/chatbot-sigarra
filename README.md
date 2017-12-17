@@ -54,7 +54,7 @@ Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta 
     ```bash
     $ touch index.js
     ```
-    A seguir vamos copiar o seguinte bloco de código:
+A seguir vamos copiar o seguinte bloco de código:
     ```javascript
     var express = require('express');  
     var bodyParser = require('body-parser');  
