@@ -97,7 +97,7 @@ Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses fic
     ```
 
 7. Configurar o Heroku
-Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
+    Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
 
 + Para utilizadores do macOS, usando o Homebrew:
     ```bash
@@ -109,8 +109,8 @@ Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depo
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     ```
 
-+ Para utilizadores do Windows:
-Oh meu... por favor...
++ Para utilizadores do Windows: 
+    Oh meu... por favor...
 
 
     A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
