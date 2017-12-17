@@ -101,12 +101,9 @@ Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depo
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     ```
 
-+ Para utilizadores do Windows: 
-    Oh meu... por favor...
-
++ Para utilizadores do Windows: Oh meu... por favor...
 
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
-
     ```bash
     $ heroku login
     $ heroku create appname
@@ -115,7 +112,6 @@ A seguir fazemos push para o server do Heroku (substituam o appname por um nome 
     $ git push heroku master
     https://appname.herokuapp.com/ deployed to Heroku  
     ```
-
 8. Criar página no Facebook
 Para criar a página acedemos a este link: https://www.facebook.com/pages/create/.
 O tipo da página é irrelevante, já que só estamos a usar esta página para testes 
