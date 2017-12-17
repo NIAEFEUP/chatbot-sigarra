@@ -11,76 +11,76 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 1. Instalar o Node
 + Para utilizadores de macOS, utilizando o Homebrew:
-    ```bash
-    $ brew install node
-    ```
+```bash
+$ brew install node
+```
 + Para utilizadores de Linux, usando o gestor de pacotes **apt**:
-    ```bash
-    $ sudo apt-get update
-    $ sudo apt-get install nodejs
-    ```
+```bash
+$ sudo apt-get update
+$ sudo apt-get install nodejs
+```
 2. Criar diretório do projeto e configurar servidor da aplicação
-    ```bash
-    $ mkdir chatbot_sigarra
-    $ cd chatbot_sigarra/
-    $ npm init
-    ```
+```bash
+$ mkdir chatbot_sigarra
+$ cd chatbot_sigarra/
+$ npm init
+```
 3. Instalar pacotes úteis do Node
-    ```bash
-    $ npm install express body-parser request --save
-    ```
+```bash
+$ npm install express body-parser request --save
+```
 Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
 4. Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
-    ```javascript
-    {
-      "name": "testbot",
-      "version": "1.0.0",
-      "description": "Chatbot Sigarra Server App",
-      "main": "index.js",
-      "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node index.js"
-      },
-      "author": "NIAEFEUP",
-      "license": "ISC",
-      "dependencies": {
-        "body-parser": "^1.15.0",
-        "express": "^4.13.4",
-        "request": "^2.72.0"
-      }
-    }
-    ```
+```javascript
+{
+  "name": "testbot",
+  "version": "1.0.0",
+  "description": "Chatbot Sigarra Server App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "NIAEFEUP",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "request": "^2.72.0"
+  }
+}
+```
 5. Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
-    ```bash
-    $ touch index.js
-    ```
+```bash
+$ touch index.js
+```
 A seguir vamos copiar o seguinte bloco de código:
 
-    ```javascript
-    var express = require('express');  
-    var bodyParser = require('body-parser');  
-    var request = require('request');  
-    var app = express();
-    
-    app.use(bodyParser.urlencoded({extended: false}));  
-    app.use(bodyParser.json());  
-    app.listen((process.env.PORT || 3000));
-    
-    // Server frontpage
-    app.get('/', function (req, res) {  
-        res.send('This is TestBot Server');
-    });
-    
-    // Facebook Webhook
-    app.get('/webhook', function (req, res) {  
-        if (req.query['hub.verify_token'] === 'niaefeup') {
-            res.send(req.query['hub.challenge']);
-        } else {
-            res.send('Invalid verify token');
-        }
-    });
-    ```
+```javascript
+var express = require('express');  
+var bodyParser = require('body-parser');  
+var request = require('request');  
+var app = express();
+
+app.use(bodyParser.urlencoded({extended: false}));  
+app.use(bodyParser.json());  
+app.listen((process.env.PORT || 3000));
+
+// Server frontpage
+app.get('/', function (req, res) {  
+    res.send('This is TestBot Server');
+});
+
+// Facebook Webhook
+app.get('/webhook', function (req, res) {  
+    if (req.query['hub.verify_token'] === 'niaefeup') {
+        res.send(req.query['hub.challenge']);
+    } else {
+        res.send('Invalid verify token');
+    }
+});
+```
 6. Griar um repositório Git 
 
 Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
