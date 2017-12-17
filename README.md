@@ -186,7 +186,6 @@ Na primeira caixa preenchemos com *PAGE_ACCESS_TOKEN* e na segunda com o token g
 ## Criar um bot que faça echo do input que recebe
 
 Se tudo correu bem, estamos agora prontos para criar o bot.
-
 Começamos por adicionar a seguinte função no final do ficheiro **index.js**: 
 
     ```javascript
