@@ -105,10 +105,10 @@ Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit:
 Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
 
   + Para utilizadores do macOS, usando o Homebrew:
-
-
+    
+    ```
     $ brew install heroku/brew/heroku
-
+    ```
 
   + Para utilizadores do Ubuntu: 
 
