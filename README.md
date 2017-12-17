@@ -1,5 +1,8 @@
-# Como configurar o Bot
+#Chatbot-Sigarra
+Este chatbot foi criado com o intuito de facilitar a interação dos alunos da FEUP com o sistema 
+SIGARRA. Permite obter diversas informações presentes no website fe.up.pt de maneira fácil e direta.
 
+# Como configurar o Bot
 Para configurar o bot precisamos de uma maneira de o conectar aos servidores 
 do Facebook. Para isso vamos usar Node.JS e o Herku. Alternativamente, podemos usar 
 o nosso próprio servidor, ou até mesmo projetá-lo na web usando o 
