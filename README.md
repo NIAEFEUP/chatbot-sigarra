@@ -81,13 +81,14 @@ Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta 
     });
     ```
 6. Griar um repositório Git
-Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, 
-neste caso os módulos do Node:
++ Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
+
     ```
     node_modules/  
     ```
 
-Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
++ Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
+
     ```bash
     $ git init
     $ git add .
@@ -95,8 +96,7 @@ Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit:
     ```
 
 7. Configurar o Heroku
-Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos 
-o Heroku Toolbelt (CLI - command line interface): 
++ Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
 
 + Para utilizadores do macOS, usando o Homebrew:
     ```bash
@@ -112,7 +112,7 @@ o Heroku Toolbelt (CLI - command line interface):
 Oh meu... por favor...
 
 
-A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
++ A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
 
         ```bash
         $ heroku login
@@ -152,12 +152,11 @@ domínio na altura de dar deploy no servidor do NI. Podemos fazê-lo facilmente 
 **Let's Encrypt**, caso o servidor ainda não o tenha.
 
 11. Subscrever a nossa app à página 
-A maneira mais simples de o fazer é correr o seguinte código no terminal, substituindo *PAGE_ACCESS_TOKEN* pelo 
-token que gerámos: 
++ A maneira mais simples de o fazer é correr o seguinte código no terminal, substituindo *PAGE_ACCESS_TOKEN* pelo token que gerámos: 
     ```bash
     $ curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=PAGE_ACCESS_TOKEN"
     ```
-Se tudo correr bem, obtemos a seguinte resposta do servidor: 
++ Se tudo correr bem, obtemos a seguinte resposta do servidor: 
     ```bash
     {"success": true}
     ```
@@ -169,9 +168,9 @@ Na primeira caixa preenchemos com *PAGE_ACCESS_TOKEN* e na segunda com o token g
 
 
 13. Criar um bot que faça echo do input que recebe
-Se tudo correu bem, estamos agora prontos para criar o bot.
++ Se tudo correu bem, estamos agora prontos para criar o bot.
 
-Começamos por adicionar a seguinte função no final do ficheiro **index.js**: 
++ Começamos por adicionar a seguinte função no final do ficheiro **index.js**: 
 
     ```javascript
     // handler receiving messages
