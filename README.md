@@ -58,7 +58,7 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
       }
     }
     ```
-    
+
 * Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
 
     ```bash
@@ -91,76 +91,77 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
         }
     });
     ```
+
 * Griar um repositório Git 
 
-Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
-
-    node_modules/
-
-Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
-
-    ```bash
-    $ git init
-    $ git add .
-    $ git commit -m 'Configuração do webhook'
-    ```
+    Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
+    
+        node_modules/
+    
+    Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
+    
+        ```bash
+        $ git init
+        $ git add .
+        $ git commit -m 'Configuração do webhook'
+        ```
 * Configurar o Heroku
 
-Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
-
-  + Para utilizadores do macOS, usando o Homebrew:
-
-    ```bash
-    $ brew install heroku/brew/heroku
-    ```
-
-  + Para utilizadores do Ubuntu: 
+    Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
     
-    ```bash
-    $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-    ```
-
-  + Para utilizadores do Windows: Oh meu... por favor...
-
-A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
-   
-    ```bash
-    $ heroku login
-    $ heroku create appname
-    creating app... done, stack is cedar-14  
-    https://appname.herokuapp.com/ | https://git.heroku.com/appname.git  
-    $ git push heroku master
-    https://appname.herokuapp.com/ deployed to Heroku  
-    ```
+      + Para utilizadores do macOS, usando o Homebrew:
+    
+        ```bash
+        $ brew install heroku/brew/heroku
+        ```
+    
+      + Para utilizadores do Ubuntu: 
+        
+        ```bash
+        $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+        ```
+    
+      + Para utilizadores do Windows: Oh meu... por favor...
+    
+    A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
+       
+        ```bash
+        $ heroku login
+        $ heroku create appname
+        creating app... done, stack is cedar-14  
+        https://appname.herokuapp.com/ | https://git.heroku.com/appname.git  
+        $ git push heroku master
+        https://appname.herokuapp.com/ deployed to Heroku  
+        ```
 
 * Criar página no Facebook
 
-Para criar a página acedemos a este link: https://www.facebook.com/pages/create/.
-O tipo da página é irrelevante, já que só estamos a usar esta página para testes 
-(organização, instituição, software... é indiferente).
+    Para criar a página acedemos a este link: https://www.facebook.com/pages/create/.
+    O tipo da página é irrelevante, já que só estamos a usar esta página para testes 
+    (organização, instituição, software... é indiferente).
 
 * Criar Facebook App
 
-Para criar a app, acedemos a este link: https://developers.facebook.com/quickstarts/, clicamos em 
-"basic setup" e preenchemos os campos com a seguinte informação:
-
-    ```
-    Display Name -> nome da app
-    Contact email -> email da vossa conta
-    ```
-
-Após isso, na Dashboard, vamos a Product Settings -> Add Product section -> Get started with Messenger.
+    Para criar a app, acedemos a este link: https://developers.facebook.com/quickstarts/, clicamos em 
+    "basic setup" e preenchemos os campos com a seguinte informação:
+    
+        ```
+        Display Name -> nome da app
+        Contact email -> email da vossa conta
+        ```
+    
+    Após isso, na Dashboard, vamos a Product Settings -> Add Product section -> Get started with Messenger.
 
 
 * Gerar o Page Access Token e configurar o webhook 
-Na aba *Messenger* da página da nossa aplicação do Facebook, na secção *Token Generation*, 
-escolhemos a página que queremos associar à app. Após isso será gerado o PAGE_ACCESS_TOKEN. Vamos 
-guardar este código para o usar a seguir.
-Na secção *Webhooks*, clicamos em *Setup webhooks*, colamos o URL que guardámos (não esquecer de colocar 
-HTTPS no início do endereço!), o verify token (que em cima definimos como *niaefeup*) e selecionamos as seguintes checkboxes: *message_deliveries*, . Por fim clicamos em "Verify" e depois "Save".
-NOTA: O webhook precisa de ser acessível via HTTPS, por isso precisaremos de um certificado para o 
-domínio na altura de dar deploy no servidor do NI. Podemos fazê-lo facilmente usando o **nginx** e o 
-**Let's Encrypt**, caso o servidor ainda não o tenha.
+    Na aba *Messenger* da página da nossa aplicação do Facebook, na secção *Token Generation*, 
+    escolhemos a página que queremos associar à app. Após isso será gerado o PAGE_ACCESS_TOKEN. Vamos 
+    guardar este código para o usar a seguir.
+    Na secção *Webhooks*, clicamos em *Setup webhooks*, colamos o URL que guardámos (não esquecer de colocar 
+    HTTPS no início do endereço!), o verify token (que em cima definimos como *niaefeup*) e selecionamos as seguintes checkboxes: *message_deliveries*, . Por fim clicamos em "Verify" e depois "Save".
+    NOTA: O webhook precisa de ser acessível via HTTPS, por isso precisaremos de um certificado para o 
+    domínio na altura de dar deploy no servidor do NI. Podemos fazê-lo facilmente usando o **nginx** e o 
+    **Let's Encrypt**, caso o servidor ainda não o tenha.
 
 
 * Subscrever a nossa app à página 
