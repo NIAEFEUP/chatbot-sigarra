@@ -25,13 +25,11 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
     ```
 
 ## Criar diretório do projeto e configurar servidor da aplicação
-
     ```bash
     $ mkdir chatbot_sigarra
     $ cd chatbot_sigarra/
     $ npm init
     ```
-
 ## Instalar pacotes úteis do Node
 
     ```bash
