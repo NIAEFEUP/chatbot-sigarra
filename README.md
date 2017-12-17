@@ -113,7 +113,7 @@ $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
 Oh meu... por favor...
 
 
-A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha:
+A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
 
 ```bash
 $ heroku login
