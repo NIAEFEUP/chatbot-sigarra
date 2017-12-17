@@ -34,9 +34,9 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 ## Instalar pacotes úteis do Node
 
-    ```bash
-    $ npm install express body-parser request --save
-    ```
+```bash
+$ npm install express body-parser request --save
+```
 
 Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
