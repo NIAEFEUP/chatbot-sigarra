@@ -81,6 +81,7 @@ Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta 
     });
     ```
 6. Griar um repositório Git 
+
 Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
 
     ```bash
