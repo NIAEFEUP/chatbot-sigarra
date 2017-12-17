@@ -154,9 +154,9 @@ Na aba *Messenger* da página da nossa aplicação do Facebook, na secção *Tok
 Após isso será gerado o PAGE_ACCESS_TOKEN. Vamos guardar este código para o usar a seguir.
 
 
-Na secção *Webhooks*, clicamos em *Setup webhooks*, colamos o URL que guardámos (não esquecer de colocar HTTPS no início do endereço!), o verify token (que em cima definimos como *niaefeup*) e selecionamos as seguintes checkboxes: *message_deliveries*, . 
+Na secção *Webhooks*, clicamos em *Setup webhooks*, colamos o URL que guardámos (não esquecer de colocar HTTPS no início do endereço!), o verify token (que em cima definimos como *niaefeup*) e selecionamos as seguintes checkboxes: *message_deliveries*, *messages*, *messaging_optins* e *messaging_postbacks*. 
 
-Por fim clicamos em "Verify" e depois "Save".
+Por fim clicamos em "Verify and Save".
 
 NOTA: O webhook precisa de ser acessível via HTTPS, por isso precisaremos de um certificado para o 
 domínio na altura de dar deploy no servidor do NI. Podemos fazê-lo facilmente usando o **nginx** e o 
