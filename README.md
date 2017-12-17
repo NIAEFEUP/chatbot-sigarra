@@ -92,9 +92,7 @@ A seguir vamos copiar o seguinte bloco de código:
 
 Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
 
-    ```
-    node_modules/  
-    ```
+    node_modules/
 
 Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
 
