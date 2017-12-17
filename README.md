@@ -34,7 +34,6 @@ Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta 
 
 ## Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
-
         {
           "name": "testbot",
           "version": "1.0.0",
