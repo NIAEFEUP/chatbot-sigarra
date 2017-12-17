@@ -13,7 +13,7 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 + Para utilizadores de macOS, utilizando o Homebrew:
 
-    ```
+    ```bash
     $ brew install node
     ```
 
