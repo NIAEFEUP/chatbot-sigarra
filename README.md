@@ -52,9 +52,9 @@ Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta 
 }
 ```
 5. Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
-```bash
-$ touch index.js
-```
+    ```bash
+    $ touch index.js
+    ```
 A seguir vamos copiar o seguinte bloco de código:
 
 ```javascript
