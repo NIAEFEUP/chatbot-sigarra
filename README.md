@@ -223,8 +223,10 @@ a seguinte função, que devemos colar no final do ficheiro.
         });
     };
     ```
+
 Por cada pedido feito pelo facebook ao servidor, precisamos sempre da mensagem e do token de accesso.
 Vamos agora guardar o ficheiro **index.js**, fazer commit e dar deploy no nosso servidor do Heroku: 
+
     ```bash
     $ git add .
     $ git commit -m 'Create Echo Bot'
