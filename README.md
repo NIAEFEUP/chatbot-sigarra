@@ -111,12 +111,12 @@ A seguir fazemos push para o server do Heroku (substituam o appname por um nome 
     https://appname.herokuapp.com/ deployed to Heroku  
     ```
 
-8. Criar página no Facebook 
+8. Criar página no Facebook
 Para criar a página acedemos a este link: https://www.facebook.com/pages/create/.
 O tipo da página é irrelevante, já que só estamos a usar esta página para testes 
 (organização, instituição, software... é indiferente).
 
-9. Criar Facebook App 
+9. Criar Facebook App
 Para criar a app, acedemos a este link: https://developers.facebook.com/quickstarts/, clicamos em 
 "basic setup" e preenchemos os campos com a seguinte informação:
     ```
