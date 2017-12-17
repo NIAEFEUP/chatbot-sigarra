@@ -68,7 +68,7 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
     $ touch index.js
     ```
 
-    A seguir vamos copiar o seguinte bloco de código:
+A seguir vamos copiar o seguinte bloco de código:
 
     ```javascript
     var express = require('express');  
@@ -97,11 +97,11 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 ## Griar um repositório Git 
 
-    Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
+Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
 
     node_modules/
 
-    Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
+Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
 
     ```bash
     $ git init
