@@ -224,8 +224,8 @@ a seguinte função, que devemos colar no final do ficheiro.
     };
     ```
 
-Por cada pedido feito pelo facebook ao servidor, precisamos sempre da mensagem e do token de accesso.
-Vamos agora guardar o ficheiro **index.js**, fazer commit e dar deploy no nosso servidor do Heroku: 
+    Por cada pedido feito pelo facebook ao servidor, precisamos sempre da mensagem e do token de accesso.
+    Vamos agora guardar o ficheiro **index.js**, fazer commit e dar deploy no nosso servidor do Heroku: 
 
     ```bash
     $ git add .
@@ -233,8 +233,8 @@ Vamos agora guardar o ficheiro **index.js**, fazer commit e dar deploy no nosso 
     $ git push heroku master
     ```
 
-Podemos agora enviar uma mensagem ao bot! Para isso procuramos o nome do bot no Messenger e 
-enviamos a mensagem.
-
-Se os passos anteriores foram feitos corretamente, o bot vai fazer echo da mensagem que enviarmos!
+    Podemos agora enviar uma mensagem ao bot! Para isso procuramos o nome do bot no Messenger e 
+    enviamos a mensagem.
+    
+    Se os passos anteriores foram feitos corretamente, o bot vai fazer echo da mensagem que enviarmos!
 
