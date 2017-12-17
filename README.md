@@ -10,11 +10,11 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 
 1. Instalar o Node
-  * Para utilizadores de macOS, utilizando o Homebrew:
-    ```bash
-    $ brew install node
-    ```
-  * Para utilizadores de Linux, usando o gestor de pacotes **apt**:
+* Para utilizadores de macOS, utilizando o Homebrew:
+```bash
+$ brew install node
+```
+* Para utilizadores de Linux, usando o gestor de pacotes **apt**:
 ```bash
 $ sudo apt-get update
 $ sudo apt-get install nodejs
