@@ -106,11 +106,15 @@ Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depo
 
   + Para utilizadores do macOS, usando o Homebrew:
 
+
     $ brew install heroku/brew/heroku
 
+
   + Para utilizadores do Ubuntu: 
-    
+
+
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
 
   + Para utilizadores do Windows: Oh meu... por favor...
 
