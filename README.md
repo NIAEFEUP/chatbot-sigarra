@@ -93,6 +93,7 @@ Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit:
     $ git add .
     $ git commit -m 'Configuração do webhook'
     ```
+
 7. Configurar o Heroku
 
 Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
