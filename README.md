@@ -182,9 +182,9 @@ Na primeira caixa preenchemos com *PAGE_ACCESS_TOKEN* e na segunda com o token g
 
 
 ## Criar um bot que faça echo do input que recebe
-
 Se tudo correu bem, estamos agora prontos para criar o bot.
 Começamos por adicionar a seguinte função no final do ficheiro **index.js**: 
+
 
     ```javascript
     // handler receiving messages
@@ -200,8 +200,10 @@ Começamos por adicionar a seguinte função no final do ficheiro **index.js**:
     });
     ```
 
+
 O post handler percorre todas as mensagens recebidas e faz echo delas se existirem, usando para isso 
 a seguinte função, que devemos colar no final do ficheiro.
+
 
     ```javascript
     // generic function sending messages
@@ -224,8 +226,9 @@ a seguinte função, que devemos colar no final do ficheiro.
     };
     ```
 
-    Por cada pedido feito pelo facebook ao servidor, precisamos sempre da mensagem e do token de accesso.
-    Vamos agora guardar o ficheiro **index.js**, fazer commit e dar deploy no nosso servidor do Heroku: 
+
+Por cada pedido feito pelo facebook ao servidor, precisamos sempre da mensagem e do token de accesso.
+Vamos agora guardar o ficheiro **index.js**, fazer commit e dar deploy no nosso servidor do Heroku: 
 
     ```bash
     $ git add .
@@ -233,8 +236,8 @@ a seguinte função, que devemos colar no final do ficheiro.
     $ git push heroku master
     ```
 
-    Podemos agora enviar uma mensagem ao bot! Para isso procuramos o nome do bot no Messenger e 
-    enviamos a mensagem.
-    
-    Se os passos anteriores foram feitos corretamente, o bot vai fazer echo da mensagem que enviarmos!
+Podemos agora enviar uma mensagem ao bot! Para isso procuramos o nome do bot no Messenger e 
+enviamos a mensagem.
+
+Se os passos anteriores foram feitos corretamente, o bot vai fazer echo da mensagem que enviarmos!
 
