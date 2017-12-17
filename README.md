@@ -36,7 +36,7 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
     $ npm install express body-parser request --save
 
 
-    Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
+Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
 ## Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
@@ -62,9 +62,7 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 
 ## Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
 
-
     $ touch index.js
-
 
 A seguir vamos copiar o seguinte bloco de código:
 
@@ -110,28 +108,22 @@ Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depo
 
   + Para utilizadores do macOS, usando o Homebrew:
 
-
     $ brew install heroku/brew/heroku
-
 
   + Para utilizadores do Ubuntu: 
     
-
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
-
 
   + Para utilizadores do Windows: Oh meu... por favor...
 
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
    
-
     $ heroku login
     $ heroku create appname
     creating app... done, stack is cedar-14  
     https://appname.herokuapp.com/ | https://git.heroku.com/appname.git  
     $ git push heroku master
     https://appname.herokuapp.com/ deployed to Heroku  
-
 
 ## Criar página no Facebook
 
