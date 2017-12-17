@@ -11,10 +11,12 @@ o nosso próprio servidor, ou até mesmo projetá-lo na web usando o
 1. Instalar o Node
 
 * Para utilizadores de macOS, utilizando o Homebrew:
+
 ```bash
 $ brew install node
 ```
 * Para utilizadores de Linux, usando o gestor de pacotes **apt**:
+
 ```bash
 $ sudo apt-get update
 $ sudo apt-get install nodejs
@@ -59,7 +61,9 @@ Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta 
     ```bash
     $ touch index.js
     ```
+
 A seguir vamos copiar o seguinte bloco de código:
+
     ```javascript
     var express = require('express');  
     var bodyParser = require('body-parser');  
@@ -87,10 +91,13 @@ A seguir vamos copiar o seguinte bloco de código:
 6. Griar um repositório Git 
 
 Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
+
     ```
     node_modules/  
     ```
+
 Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit: 
+
     ```bash
     $ git init
     $ git add .
@@ -99,16 +106,23 @@ Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit:
 7. Configurar o Heroku
 
 Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
+
 + Para utilizadores do macOS, usando o Homebrew:
+
     ```bash
     $ brew install heroku/brew/heroku
     ```
+
 + Para utilizadores do Ubuntu: 
+    
     ```bash
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     ```
+
 + Para utilizadores do Windows: Oh meu... por favor...
+
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
+   
     ```bash
     $ heroku login
     $ heroku create appname
@@ -125,12 +139,15 @@ O tipo da página é irrelevante, já que só estamos a usar esta página para t
 (organização, instituição, software... é indiferente).
 
 9. Criar Facebook App
+
 Para criar a app, acedemos a este link: https://developers.facebook.com/quickstarts/, clicamos em 
 "basic setup" e preenchemos os campos com a seguinte informação:
+
     ```
     Display Name -> nome da app
     Contact email -> email da vossa conta
     ```
+    
 Após isso, na Dashboard, vamos a Product Settings -> Add Product section -> Get started with Messenger.
 
 
