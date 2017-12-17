@@ -8,34 +8,34 @@ do Facebook. Para isso vamos usar Node.JS e o Herku. Alternativamente, podemos u
 o nosso próprio servidor, ou até mesmo projetá-lo na web usando o 
 **localtunnel** ou o **ngrok**.
 
-1. Instalar o Node
+* Instalar o Node
 
-* Para utilizadores de macOS, utilizando o Homebrew:
+  * Para utilizadores de macOS, utilizando o Homebrew:
 
 ```bash
 $ brew install node
 ```
-* Para utilizadores de Linux, usando o gestor de pacotes **apt**:
+  * Para utilizadores de Linux, usando o gestor de pacotes **apt**:
 
 ```bash
 $ sudo apt-get update
 $ sudo apt-get install nodejs
 ```
-2. Criar diretório do projeto e configurar servidor da aplicação
+* Criar diretório do projeto e configurar servidor da aplicação
 
 ```bash
 $ mkdir chatbot_sigarra
 $ cd chatbot_sigarra/
 $ npm init
 ```
-3. Instalar pacotes úteis do Node
++ Instalar pacotes úteis do Node
 
 ```bash
 $ npm install express body-parser request --save
 ```
 Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta forma o Heroku consegue saber como fazer deploy dos ficheiros corretamente, bem como saber como correr a app.
 
-4. Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
+* Adicionar a linha *"start": "node index.js"* dentro do bloco de código *"scripts"*
 
 ```javascript
 {
@@ -56,7 +56,7 @@ Fazer isto permite incluir as dependências do ficheiro **package.json**. Desta 
   }
 }
 ```
-5. Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
+* Criar o ficheiro **index.js** no diretório do projeto e preenchê-lo
 
     ```bash
     $ touch index.js
@@ -88,7 +88,7 @@ A seguir vamos copiar o seguinte bloco de código:
         }
     });
     ```
-6. Griar um repositório Git 
+* Griar um repositório Git 
 
 Primeiro criamos um ficheiro **.gitignore** para que o Git não inclua esses ficheiros no repositório, neste caso os módulos do Node:
 
@@ -103,23 +103,23 @@ Depois criamos o repositório, adicionando todos os ficheiros e fazendo commit:
     $ git add .
     $ git commit -m 'Configuração do webhook'
     ```
-7. Configurar o Heroku
+* Configurar o Heroku
 
 Para isto temos que criar uma conta gratuita no Heroku (http://heroku.com). Depois disso instalamos o Heroku Toolbelt (CLI - command line interface): 
 
-+ Para utilizadores do macOS, usando o Homebrew:
+  + Para utilizadores do macOS, usando o Homebrew:
 
     ```bash
     $ brew install heroku/brew/heroku
     ```
 
-+ Para utilizadores do Ubuntu: 
+  + Para utilizadores do Ubuntu: 
     
     ```bash
     $ wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
     ```
 
-+ Para utilizadores do Windows: Oh meu... por favor...
+  + Para utilizadores do Windows: Oh meu... por favor...
 
 A seguir fazemos push para o server do Heroku (substituam o appname por um nome à vossa escolha):
    
@@ -132,13 +132,13 @@ A seguir fazemos push para o server do Heroku (substituam o appname por um nome 
     https://appname.herokuapp.com/ deployed to Heroku  
     ```
 
-8. Criar página no Facebook
+* Criar página no Facebook
 
 Para criar a página acedemos a este link: https://www.facebook.com/pages/create/.
 O tipo da página é irrelevante, já que só estamos a usar esta página para testes 
 (organização, instituição, software... é indiferente).
 
-9. Criar Facebook App
+* Criar Facebook App
 
 Para criar a app, acedemos a este link: https://developers.facebook.com/quickstarts/, clicamos em 
 "basic setup" e preenchemos os campos com a seguinte informação:
@@ -147,11 +147,11 @@ Para criar a app, acedemos a este link: https://developers.facebook.com/quicksta
     Display Name -> nome da app
     Contact email -> email da vossa conta
     ```
-    
+
 Após isso, na Dashboard, vamos a Product Settings -> Add Product section -> Get started with Messenger.
 
 
-10. Gerar o Page Access Token e configurar o webhook 
+* Gerar o Page Access Token e configurar o webhook 
 Na aba *Messenger* da página da nossa aplicação do Facebook, na secção *Token Generation*, 
 escolhemos a página que queremos associar à app. Após isso será gerado o PAGE_ACCESS_TOKEN. Vamos 
 guardar este código para o usar a seguir.
@@ -162,7 +162,7 @@ domínio na altura de dar deploy no servidor do NI. Podemos fazê-lo facilmente 
 **Let's Encrypt**, caso o servidor ainda não o tenha.
 
 
-11. Subscrever a nossa app à página 
+* Subscrever a nossa app à página 
 A maneira mais simples de o fazer é correr o seguinte código no terminal, substituindo *PAGE_ACCESS_TOKEN* pelo token que gerámos: 
     ```bash
     $ curl -X POST "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=PAGE_ACCESS_TOKEN"
@@ -173,12 +173,12 @@ Se tudo correr bem, obtemos a seguinte resposta do servidor:
     ```
 
 
-12. Definir o PAGE_ACCESS_TOKEN no Heroku
+* Definir o PAGE_ACCESS_TOKEN no Heroku
 Na página da nossa app no site do Heroku, clicamos em *Settings* e depois em *Config Variable*. 
 Na primeira caixa preenchemos com *PAGE_ACCESS_TOKEN* e na segunda com o token gerado.
 
 
-13. Criar um bot que faça echo do input que recebe
+* Criar um bot que faça echo do input que recebe
 
 
 Se tudo correu bem, estamos agora prontos para criar o bot.
