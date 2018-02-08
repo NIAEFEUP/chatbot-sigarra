@@ -1,15 +1,8 @@
 welcome: # this is the #welcome bloc referenced in index.js
   - typing: true
     text: # Picks one randomly
-      - Hey there!
-      - Hello {{user.first_name}}
-      - Good day :)
-  - text: This is just a regular Hello World, I don't do anything ;)
-    typing: 2s
-  - text: Make sure to check out the 'index.js' file to see how I work
-    typing: true
-  - wait: 5s
-  - text: You can say goodbye now
+      - Olaaa 
+  - text: Escreve 'help' para veres todos os meus comandos ;)
     typing: 1s
 
 goodbye:
@@ -20,11 +13,6 @@ goodbye:
 feup:
   - typing: true
     text: Este é o site da FEUP - http://fe.up.pt/
-
-
-moodle:
-  - typing: true
-    text: Este é o site da FEUP - http://moodle.up.pt/
 
 cat:
   - on: facebook
@@ -37,6 +25,7 @@ cat:
         payload: BTN_RANDOM
       - type: web_url
         url: https://youtube.com/?q=cats
+        title: Sexy cat videos
 
 moodle:
   - typing: true
@@ -49,4 +38,4 @@ moodle:
         payload: QR_YES
       - content_type: text
         title: nao
-        payload: QR_NO       title: Cats on Youtube
+        payload: QR_NO
