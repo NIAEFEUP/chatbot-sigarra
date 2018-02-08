@@ -3,7 +3,7 @@
 
   This is the programmatic entry point of your bot.
   Your bot's logic resides here.
-  
+
   Here's the next steps for you:
   1. Read this file to understand how this simple bot works
   2. Read the `content.yml` file to understand how messages are sent
@@ -52,4 +52,5 @@ module.exports = function(bp) {
   }, (event, next) => {
     event.reply('#cat')
   })
+
 }

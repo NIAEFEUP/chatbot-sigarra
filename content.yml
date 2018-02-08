@@ -37,4 +37,16 @@ cat:
         payload: BTN_RANDOM
       - type: web_url
         url: https://youtube.com/?q=cats
-        title: Cats on Youtube
+
+moodle:
+  - typing: true
+    text: Este é o site da Moodle - http://moodle.up.pt/
+  - wait: 3s
+  - text: Precisa de mais ajuda?
+    quick_replies:
+      - content_type: text
+        title: sim
+        payload: QR_YES
+      - content_type: text
+        title: nao
+        payload: QR_NO       title: Cats on Youtube
