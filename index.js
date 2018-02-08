@@ -1,111 +1,55 @@
-var express = require('express');  
-var bodyParser = require('body-parser');  
-var request = require('request');  
-var app = express();
+/*
+  CONGRATULATIONS on creating your first Botpress bot!
 
-app.use(bodyParser.urlencoded({extended: false}));  
-app.use(bodyParser.json());  
-app.listen((process.env.PORT || 3000));
+  This is the programmatic entry point of your bot.
+  Your bot's logic resides here.
+  
+  Here's the next steps for you:
+  1. Read this file to understand how this simple bot works
+  2. Read the `content.yml` file to understand how messages are sent
+  3. Install a connector module (Facebook Messenger and/or Slack)
+  4. Customize your bot!
 
-// Server frontpage
-app.get('/', function (req, res) {  
-    res.send('This is TestBot Server');
-});
+  Happy bot building!
 
-// Facebook Webhook
-app.get('/webhook', function (req, res) {  
-    if (req.query['hub.verify_token'] === 'niaefeup') {
-        res.send(req.query['hub.challenge']);
-    } else {
-        res.send('Invalid verify token');
-    }
-});
+  The Botpress Team
+  ----
+  Getting Started (Youtube Video): https://www.youtube.com/watch?v=HTpUmDz9kRY
+  Documentation: https://botpress.io/docs
+  Our Slack Community: https://slack.botpress.io
+*/
 
+module.exports = function(bp) {
+  // Listens for a first message (this is a Regex)
+  // GET_STARTED is the first message you get on Facebook Messenger
+  bp.hear(/GET_STARTED|hello|hi|test|hey|holla/i, (event, next) => {
+    event.reply('#welcome') // See the file `content.yml` to see the block
+  })
 
-// handler receiving messages
-app.post('/webhook', function (req, res) {  
-    var events = req.body.entry[0].messaging;
-    for (i = 0; i < events.length; i++) {
-        var event = events[i];
-        if (event.message && event.message.text) {  
-            if (!kittenMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "Echo: " + event.message.text});
-            }
-        } else if (event.postback) {
-            console.log("Postback received: " + JSON.stringify(event.postback));
-        }
-    }
-    res.sendStatus(200);
-});
+  // You can also pass a matcher object to better filter events
+  bp.hear({
+    type: /message|text/i,
+    text: /exit|bye|goodbye|quit|done|leave|stop/i
+  }, (event, next) => {
+    event.reply('#goodbye', {
+      // You can pass data to the UMM bloc!
+      reason: 'unknown'
+    })
+  })
 
-
-// generic function sending messages
-function sendMessage(recipientId, message) {  
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-            recipient: {id: recipientId},
-            message: message,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
-    });
-};
+  bp.hear({
+    type: /message|text/i,
+    text: /feup|site/i
+  }, (event, next) => {
+    event.reply('#feup')
+  })
 
 
-
-
-// send rich message with kitten
-function kittenMessage(recipientId, text) {
-    
-        text = text || "";
-        var values = text.split(' ');
-    
-        if (values.length === 3 && values[0] === 'kitten') {
-            if (Number(values[1]) > 0 && Number(values[2]) > 0) {
-    
-                var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
-    
-                message = {
-                    "attachment": {
-                        "type": "template",
-                        "payload": {
-                            "template_type": "generic",
-                            "elements": [{
-                                "title": "Kitten",
-                                "subtitle": "Cute kitten picture",
-                                "image_url": imageUrl ,
-                                "buttons": [{
-                                    "type": "web_url",
-                                    "url": imageUrl,
-                                    "title": "Show kitten"
-                                    }, {
-                                    "type": "postback",
-                                    "title": "I like this",
-                                    "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                                }]
-                            }]
-                        }
-                    }
-                };
-    
-                sendMessage(recipientId, message);
-    
-                return true;
-            }
-        }
-    
-        return false;
-    
-    };
-
-
-
-
-
+  bp.hear({
+    platform: 'facebook',
+    type: 'message',
+    text: /cat/i
+  }, (event, next) => {
+    event.reply('#cat')
+  })
+}
