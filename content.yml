@@ -14,15 +14,17 @@ feup:
   - typing: true
     text: Este é o site da FEUP - http://fe.up.pt/
 
-cat:
 fallback:
   - text: Nao percebi o que quiseste dizer, por favor escrever 'ajuda' para veres tudo o que posso fazer
+
+#exemplo de botao
+exemplo_botao:
   - on: facebook
     template_type: button
-    text: Please click any of the buttons below
+    text: Este texto acompanha o botao
     buttons:
       - <BTN_RANDOM> Random cat videos
-      - type: postback
+      - type: postback #envia como resposta para o bot
         title: This button gives the same thing
         payload: BTN_RANDOM
       - type: web_url
