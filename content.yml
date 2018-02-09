@@ -31,9 +31,10 @@ exemplo_botao:
         url: https://youtube.com/?q=cats
         title: Sexy cat videos
 
-moodle:
+#exemplo de quick reply
+exemplo_quick_reply:
   - typing: true
-    text: Este é o site da Moodle - http://moodle.up.pt/
+    text: Este texto acompanhaa a QR
   - wait: 3s
   - text: Precisa de mais ajuda?
     quick_replies:
