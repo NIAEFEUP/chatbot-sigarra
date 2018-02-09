@@ -36,4 +36,9 @@ module.exports = function(bp) {
     event.reply('#cat')
   })
 
+	bp.fallbackHandler = (event, next) => {
+		if(event.type == 'message' || event.type == 'text'){
+			event.reply('#fallback')
+		}
+	}
 }
