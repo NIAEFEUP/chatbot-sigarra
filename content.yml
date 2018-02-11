@@ -14,11 +14,22 @@ feup:
   - typing: true
     text: Este é o site da FEUP - http://fe.up.pt/
 
+moodle:
+  - typing: true
+    text: Este é o Moodle da FEUP - https://moodle.up.pt/
+
 fromSigarra:
   - typing: true
     text: >-
       Informacao tirada do SIGARRA:
       {{texto}}
+
+ajuda:
+  - typing: true
+    text: |-
+      feup: Link do site da FEUP
+      moodle: Link para o moodle da FEUP
+      erasmus: Informacao acerca das vagas de Erasmus
 
 fallback:
   - text: Nao percebi o que quiseste dizer, por favor escrever 'ajuda' para veres tudo o que posso fazer

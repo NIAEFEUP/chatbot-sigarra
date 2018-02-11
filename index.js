@@ -28,6 +28,13 @@ module.exports = function(bp) {
 	})
 
 	bp.hear({
+	  type: /message|text/i,
+	  text: /moodle/i
+	}, (event, next) => {
+	  event.reply('#moodle')
+	})
+
+	bp.hear({
 		type: /message|text/i,
 		text: /erasmus/i
 	}, (event, next) => {
@@ -35,6 +42,13 @@ module.exports = function(bp) {
 			event.reply('#fromSigarra', {
 				texto: informacao })  //passar o texto tirado do site do sigarra para enviar
 		})
+	})
+
+	bp.hear({
+	  type: /message|text/i,
+	  text: /ajuda|help/i
+	}, (event, next) => {
+	  event.reply('#ajuda')
 	})
 
 	bp.fallbackHandler = (event, next) => {
