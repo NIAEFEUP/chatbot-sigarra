@@ -1,8 +1,8 @@
 welcome: # this is the #welcome bloc referenced in index.js
   - typing: true
     text: # Picks one randomly
-      - Olaaa 
-  - text: Escreve 'help' para veres todos os meus comandos ;)
+      - Olaaa
+  - text: Escreve 'ajuda' para veres todos os meus comandos ;)
     typing: 1s
 
 goodbye:
@@ -13,6 +13,12 @@ goodbye:
 feup:
   - typing: true
     text: Este é o site da FEUP - http://fe.up.pt/
+
+fromSigarra:
+  - typing: true
+    text: >-
+      Informacao tirada do SIGARRA:
+      {{texto}}
 
 fallback:
   - text: Nao percebi o que quiseste dizer, por favor escrever 'ajuda' para veres tudo o que posso fazer
@@ -45,19 +51,18 @@ exemplo_quick_reply:
         title: nao
         payload: QR_NO
 
-#exemplo de lista
-#passem como objeto um array com os elementos da lista
-#estas "categorias" como title/subtitle/image_url estao na developer page do facebook
-exemplo_lista:
-  - template_type: list
-    elements:
-      {{#objeto}}
-      - title: {{propriedade do objeto}}
-        subtitle: |
-          Isto e um texto xpto {{propriedade do objeto}}
-          {{propriedade do objeto}} continuacao do texto 
-        image_url: "{{{propriedade do objeto com url}}}" #nao sei pq tem 3 chavetas
-        buttons:
-          - <BOTAO_COM_ID_{{propriedade com id}}> Pick
-      {{/objeto}}
-
+# #exemplo de lista
+# #passem como objeto um array com os elementos da lista
+# #estas "categorias" como title/subtitle/image_url estao na developer page do facebook
+# exemplo_lista:
+#   - template_type: list
+#     elements:
+#       {{#objeto}}
+#       - title: {{propriedade do objeto}}
+#         subtitle: |
+#           Isto e um texto xpto {{propriedade do objeto}}
+#           {{propriedade do objeto}} continuacao do texto
+#         image_url: "{{{propriedade do objeto com url}}}" #nao sei pq tem 3 chavetas
+#         buttons:
+#           - <BOTAO_COM_ID_{{propriedade com id}}> Pick
+#       {{/objeto}}

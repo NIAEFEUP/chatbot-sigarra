@@ -6,7 +6,11 @@
   "dependencies": {
     "botpress": "1.x",
     "botpress-messenger": "^2.2.10",
-    "botpress-web": "1.x"
+    "botpress-web": "1.x",
+    "cheerio": "latest",
+    "express": "latest",
+    "nightmare": "^2.10.0",
+    "request": "latest"
   },
   "scripts": {
     "start": "botpress start",
