@@ -1,9 +1,9 @@
 # chatbot-sigarra
 
-chatbot-sigarra is an open-source chatbot created to help students get information 
+**chatbot-sigarra** is an open-source chatbot created to help students get information 
 from [FEUP](https://www.fe.up.pt/) web infrastructure SIGARRA in a more easy and 
 immediate way. It is powered by the [Botpress](https://www.google.com) framework 
-and by the Messenger Platform. Written in JavaScript. Made with ❤️ by NIAEFEUP.
+and by the Messenger Platform. Written in JavaScript. 
 
 _______________________________________________________________________________________
 
