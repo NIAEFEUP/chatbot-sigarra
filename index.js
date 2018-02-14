@@ -64,6 +64,23 @@ module.exports = function(bp) {
 *    event.reply('#cat')
 *  })
 */
+	bp.hear({
+        type: /message|text/i,
+        text: /up|numero/i
+    }, (event, next) =>{
+		bp.messenger.sendText(event.user.id, 'Por favor escreve "O meu número UP é" seguido do teu número') //Explica como guardar o número Up
+	})
+
+	var registo_up = /Teste (.+)/
+
+	bp.hear({					//Função para guardar Numero  !! Ainda não 100% funcional
+        text: registo_up
+    }, event => {
+		var match = registo_up.exec(event,text)
+		bp.db.kvs.get('numero_up', match[1])		//Guarda o número UP na DB com o Key Value numero_up
+		bp.messenger.sendText(even.user.id, "O número " + match[1] + " foi guardado!")
+
+	})
 }
 
 function scrapeSigarra(callback){
