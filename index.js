@@ -3,6 +3,13 @@
   */
 
 module.exports = function(bp) {
+	bp.hear({
+		type: /message|text/i
+	},
+	(event, next) => {
+		console.log("Mensagem Recebida: "+ (event.text))
+		next()
+    })
   // Listens for a first message (this is a Regex)
   // GET_STARTED is the first message you get on Facebook Messenger
 	bp.hear(/GET_STARTED|hello|hi|test|hey|holla/i, (event, next) => {
@@ -71,17 +78,20 @@ module.exports = function(bp) {
 		bp.messenger.sendText(event.user.id, 'Por favor escreve "O meu número UP é" seguido do teu número') //Explica como guardar o número Up
 	})
 
-	var registo_up = /Teste (.+)/
+	var registo_up = /Meias (.+)/;
 
 	bp.hear({					//Função para guardar Numero  !! Ainda não 100% funcional
         text: registo_up
     }, event => {
-		var match = registo_up.exec(event,text)
-		bp.db.kvs.get('numero_up', match[1])		//Guarda o número UP na DB com o Key Value numero_up
-		bp.messenger.sendText(even.user.id, "O número " + match[1] + " foi guardado!")
+		var match = registo_up.exec(event.text)
+		var reminder = match[1]
+    	bp.messenger.sendText(event.user.id, "O número " + reminder + " foi guardado!")
+        bp.db.kvs.set('numero_up', reminder)		//Guarda o número UP na DB com o Key Value numero_up
 
 	})
-}
+
+
+	}
 
 function scrapeSigarra(callback){
 	const Nightmare = require('nightmare');
