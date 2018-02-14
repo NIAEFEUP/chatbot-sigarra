@@ -8,6 +8,7 @@
     "botpress-messenger": "^2.2.10",
     "botpress-web": "1.x",
     "cheerio": "latest",
+    "electron": "^1.8.2",
     "express": "latest",
     "nightmare": "^2.10.0",
     "request": "latest"
