@@ -14,8 +14,33 @@
 # greetingMessage: ""
 
 # https://developers.facebook.com/docs/messenger-platform/messenger-profile/persistent-menu
-# persistentMenuItems: []
-
+persistentMenuItems: [
+      {
+        "title":"Menu com submenus",
+        "type":"nested",
+        "call_to_actions":[ {
+          "type":"postback",
+          "title":"Sub-Opcao 1",
+          "payload":"nao interessa o q tem aqui"
+        }, {
+          "type":"postback",
+          "title":"Sub-Opcao 2",
+          "payload":"nao pode estar vazio"
+        }
+        ]   
+      },
+      {
+        "title":"Opcao 1",
+        "payload":"coloca algo",
+        "type":"postback"
+      }, {
+        "type":"web_url",
+        "url":"https://github.com/NIAEFEUP/chatbot-sigarra",
+        "webview_height_ratio":"tall",
+        "title":"Github repo"
+      }
+]
+ 
 targetAudience: openToAll
 # targetAudienceOpenToSome: ""
 # targetAudienceCloseToSome: ""
