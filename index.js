@@ -2,7 +2,11 @@
   CODIGO DO CHAT BOT
   */
 
+const Nightmare = require('nightmare');
+const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
+
 module.exports = function(bp) {
+
 	bp.hear({
 		type: /message|text/i
 	},
@@ -10,11 +14,13 @@ module.exports = function(bp) {
 		console.log("Mensagem Recebida: "+ (event.text))
 		next()
     })
-  // Listens for a first message (this is a Regex)
-  // GET_STARTED is the first message you get on Facebook Messenger
+	
+	// Listens for a first message (this is a Regex)
+	// GET_STARTED is the first message you get on Facebook Messenger
+
 	bp.hear(/GET_STARTED|hello|hi|test|hey|holla/i, (event, next) => {
-    event.reply('#welcome') // See the file `content.yml` to see the block
-  })
+    		event.reply('#welcome') // See the file `content.yml` to see the block
+  	})
 
 	// You can also pass a matcher object to better filter events
 	bp.hear({
@@ -58,21 +64,9 @@ module.exports = function(bp) {
 	  event.reply('#ajuda')
 	})
 
-	bp.fallbackHandler = (event, next) => {
-		if(event.type == 'message' || event.type == 'text'){
-			event.reply('#fallback')
-		}
-	}
-/*  bp.hear({
-*    platform: 'facebook',
-*    type: 'message',
-*    text: /cat/i
-*  }, (event, next) => {
-*    event.reply('#cat')
-*  })
-*/
+	
 	bp.hear({
-        type: /message|text/i,
+	        type: /message|text/i,
         text: /up|numero/i
     }, (event, next) =>{
 		bp.messenger.sendText(event.user.id, 'Por favor escreve "O meu número UP é" seguido do teu número') //Explica como guardar o número Up
@@ -82,7 +76,7 @@ module.exports = function(bp) {
 
 	bp.hear({					//Função para guardar Numero  !! Ainda não 100% funcional
         text: registo_up
-    }, event => {
+    }, (event, next) => {
 		var match = registo_up.exec(event.text)
 		var reminder = match[1]
     	bp.messenger.sendText(event.user.id, "O número " + reminder + " foi guardado!")
@@ -90,17 +84,20 @@ module.exports = function(bp) {
 
 	})
 
-
+	bp.fallbackHandler = (event, next) => {
+		if(event.type == 'message' || event.type == 'text'){
+			event.reply('#fallback')
+		}
 	}
 
+}
+
 function scrapeSigarra(callback){
-	const Nightmare = require('nightmare');
-	const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
 	var cheerio = require('cheerio');
 
 	var lista = [];
 
-		nightmare.goto("https://sigarra.up.pt/feup/en/web_page.inicial") //vai a pagina inicial do sigarra
+		nightmare.goto('https://sigarra.up.pt/feup/en/web_page.inicial') //vai a pagina inicial do sigarra
 							.wait('#user')  //espera para que carregue
 							.insert('#user', "")  //utilizador para login
 							.insert('#pass', "")  //pass para login
