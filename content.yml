@@ -18,12 +18,6 @@ moodle:
   - typing: true
     text: Este é o Moodle da FEUP - https://moodle.up.pt/
 
-fromSigarra:
-  - typing: true
-    text: >-
-      Informacao tirada do SIGARRA:
-      {{texto}}
-
 ajuda:
   - typing: true
     text: |-
