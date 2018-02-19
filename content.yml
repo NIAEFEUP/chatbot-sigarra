@@ -56,9 +56,9 @@ exemplo_quick_reply:
         title: nao
         payload: QR_NO
 
-# #exemplo de lista
-# #passem como objeto um array com os elementos da lista
-# #estas "categorias" como title/subtitle/image_url estao na developer page do facebook
+#exemplo de lista
+#passem como objeto um array com os elementos da lista
+#estas "categorias" como title/subtitle/image_url estao na developer page do facebook
 # exemplo_lista:
 #   - template_type: list
 #     elements:

@@ -3,7 +3,7 @@
 # You can override these settings with ENV variables. They are commented below.
 
 # hostname: "" # MESSENGER_HOST
-
+#
 # applicationID: "" # MESSENGER_APP_ID
 # accessToken: "" # MESSENGER_ACCESS_TOKEN
 # appSecret: "" # MESSENGER_APP_SECRET
@@ -27,7 +27,7 @@ persistentMenuItems: [
           "title":"Sub-Opcao 2",
           "payload":"nao pode estar vazio"
         }
-        ]   
+        ]
       },
       {
         "title":"Opcao 1",
@@ -40,7 +40,7 @@ persistentMenuItems: [
         "title":"Github repo"
       }
 ]
- 
+
 targetAudience: openToAll
 # targetAudienceOpenToSome: ""
 # targetAudienceCloseToSome: ""

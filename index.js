@@ -3,7 +3,7 @@
   */
 
 const Nightmare = require('nightmare');
-const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
+const waitTimeInterval = 1000;
 
 module.exports = function(bp) {
 
@@ -55,7 +55,9 @@ module.exports = function(bp) {
 		var curso = event.captured[0];
 		var pais = event.captured[1];
 		scrapeSigarra(curso, pais, function(informacao){
-			bp.messenger.sendText(event.user.id, informacao);
+			for (var i = 0; i < informacao.length; i++){
+				bp.messenger.sendText(event.user.id, String(informacao[i]));
+			}
 		})
 	})
 
@@ -65,7 +67,7 @@ module.exports = function(bp) {
 	}, (event, next) => {
 		var curso = event.captured[0];
 		scrapeSigarra(curso, "nothing", function(informacao){
-			bp.messenger.sendText(event.user.id, informacao);
+			bp.messenger.sendText(event.user.id, String(informacao));
 		})
 	})
 
@@ -110,6 +112,7 @@ module.exports = function(bp) {
 
 function scrapeSigarra(cursoUser, paisUser, callback){
 	var cheerio = require('cheerio');
+	const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
 
 	var cursos = ['meb', 'miegi', 'miea', 'mesg', 'mib', 'mci', 'lceemg', 'memg', 'miec', 'mieec', 'mieic', 'miem', 'miemm', 'mieq', 'mppu'];
 	cursoUser = cursoUser.toString().toLowerCase();
@@ -125,13 +128,13 @@ function scrapeSigarra(cursoUser, paisUser, callback){
 	var lista = [];
 
 		nightmare.goto('https://sigarra.up.pt/feup/en/web_page.inicial') //vai a pagina inicial do sigarra
-							.wait('#user')  //espera para que carregue
+							.wait('#user', waitTimeInterval)  //espera para que carregue
 							.insert('#user', process.env.USER_SIGARRA )  //utilizador para login
 							.insert('#pass', process.env.PASS_SIGARRA )  //pass para login
 							.click('button[title="Iniciar sessão"]')  //clicar no butao de iniciar sessao
-							.wait('.nomelogin')  //esperar carregar
+							.wait('.nomelogin', waitTimeInterval)  //esperar carregar
 							.goto("https://sigarra.up.pt/feup/pt/coop_candidatura_geral.ver_vagas")  //carregar pagina dos erasmus
-							.wait('.nomelogin')  //esperar carregar
+							.wait('.nomelogin', waitTimeInterval)  //esperar carregar
 							.evaluate(function() {
 								return document.body.innerHTML  //retornar o html da pagina
 							})
@@ -147,13 +150,23 @@ function scrapeSigarra(cursoUser, paisUser, callback){
 										if (paisUser === "nothing" && pais !== lista[lista.length-1]){
 											lista.push(pais);
 										} else if (RemoveAccents(pais.toString().toLowerCase()) == paisUser && vagas != "0"){  //se os paises coincidirem e houver vagas
-											lista.push(pais + " | " + universidade + " | Vagas-" + vagas); //adicionar a lista informacao
+											lista.push(universidade + " | Vagas-" + vagas); //adicionar a lista informacao
 										}
 								});
 								if (lista.length == 0	){
-									callback("Não existem universidades com essas caracteristicas com vagas"); //Caso nao se encontrem universidades com as caracteristicas desejadas
+									var correto = [];
+									correto.push("Não existem universidades com essas caracteristicas com vagas")
+									callback(correto); //Caso nao se encontrem universidades com as caracteristicas desejadas
 								} else {
-									callback(lista.slice(0, paisUser=='nothing'? lista.length : Math.min(lista.length, 4)).join('\n'));  //Envia a lista das universidades ou paises separados por \n
+									if (paisUser=='nothing'){
+								 		callback(lista.join('\n'));
+								 	} else {
+										var correto = [];
+												for (var i = 0; i < lista.length; i+=4){
+													correto.push(lista.slice(i, Math.min(i+4, lista.length)).join('\n'));
+												}
+												callback(correto);
+									}
 								}
 							});
 }
