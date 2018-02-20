@@ -37,12 +37,12 @@ module.exports = function(bp) {
 	 })
 	})
 
-	bp.hear({
-	  type: /message|text/i,
-	  text: /feup|site/i
-	}, (event, next) => {
-	  event.reply('#feup')
-	})
+//	bp.hear({
+//	  type: /message|text/i,
+//	  text: /feup|site/i
+//	}, (event, next) => {
+//	  event.reply('#feup')
+//	})
 
 	bp.hear({
 	  type: /message|text/i,
@@ -154,11 +154,30 @@ function mostrarCursos(partes, callback){
 		switch(partes.length){
 			case 1:
 				callback('Escreve \'cursos faculdade\' para veres os cursos por faculdade')
-				var mensagem_zero = 'Tens disponivel as seguintes:\n'
+				let mensagem_zero = 'Tens disponivel as seguintes:\n'
 				faculdades.forEach(function(faculdade){
 					mensagem_zero += faculdade + '\n'
 				})
 				callback(mensagem_zero)
+				break
+			case 2:
+				let indiceFaculdade = faculdades.indexOf(partes[1])
+				if(indiceFaculdade == -1){
+					callback('Nao conheco a faculdade ' + partes[1] + '\nPor favor tenta outra vez')
+				}
+				else{
+					let mensagem = 'Estes sao os cursos disponiveis:\n'
+					cursos[indiceFaculdade].forEach(function(curso) {
+						if((mensagem.length + curso.acronym.length + curso.name.length + 4) <= 300){
+							mensagem += curso.acronym + ' - ' + curso.name + '\n' 
+						}
+						else{
+							callback(mensagem)
+							mensagem = curso.acronym + ' - ' + curso.name + '\n' 
+						}
+					} )
+				}
+
 				break
 			default:
 				console.log('lmao')
