@@ -5,15 +5,19 @@
 const Nightmare = require('nightmare');
 const waitTimeInterval = 1000;
 
+listaDeCursos = []
+cursos = undefined
+faculdades = undefined
+
 module.exports = function(bp) {
 
 	bp.hear({
 		type: /message|text/i
 	},
 	(event, next) => {
-		console.log("Mensagem Recebida: "+ (event.text))
+		console.log("(" + event.user.id + ") " + event.user.first_name + " " + event.user.last_name + ": "+ (event.text))
 		next()
-    })
+	})
 
 	// Listens for a first message (this is a Regex)
 	// GET_STARTED is the first message you get on Facebook Messenger
@@ -85,6 +89,13 @@ module.exports = function(bp) {
 	  event.reply('#ajuda')
 	})
 
+	bp.hear({
+		type: /message|text/i,
+		text: /cursos/i
+	}, (event, next) => {
+
+		mostrarCursos(event.text.split(' '), function(param){ bp.messenger.sendText(event.user.id, param)})  //passar o texto tirado do site do sigarra para enviar
+	})
 
 	bp.hear({
 	        type: /message|text/i,
@@ -110,8 +121,59 @@ module.exports = function(bp) {
 
 }
 
+function mostrarCursos(partes, callback){
+	const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
+	
+	//esta parte faz setup ao resto
+	if(listaDeCursos.length == 0){
+		nightmare.goto('https://ni.fe.up.pt/tts/api/courses')
+		.evaluate(function() {
+			return document.body.innerText	
+		})
+		.end()
+		.then(function(texto) {
+			listaDeCursos = JSON.parse(texto)
+			cursos = Array(Math.max.apply(Math, listaDeCursos.map(function(curso){return curso.faculty_id;})))
+			faculdades = new Array(cursos.length)
+
+			listaDeCursos.forEach(function(curso){
+				if(typeof cursos[curso.faculty_id] === 'undefined'){
+					cursos[curso.faculty_id] = new Array();
+					faculdades[curso.faculty_id] = curso.plan_url.substring(curso.plan_url.indexOf('up.pt/')+6, curso.plan_url.indexOf('/pt/cur'))
+					
+				}
+				cursos[curso.faculty_id].push( { name: curso.name, acronym : curso.acronym } ); //sera que incluo o tipo??
+			});
+
+			console.log('Lista de cursos recebida a partir do TTS')
+			console.log('Existem ' + listaDeCursos.length + ' cursos')
+			callback('Desculpa, volta a mandar a mensagem que nao tinha carregado os cursos!')
+		});
+	}
+	else{
+		switch(partes.length){
+			case 1:
+				callback('Escreve \'cursos faculdade\' para veres os cursos por faculdade')
+				var mensagem_zero = 'Tens disponivel as seguintes:\n'
+				faculdades.forEach(function(faculdade){
+					mensagem_zero += faculdade + '\n'
+				})
+				callback(mensagem_zero)
+				break
+			default:
+				console.log('lmao')
+
+		}
+
+
+	}
+
+}
+
 function scrapeSigarra(cursoUser, paisUser, callback){
+
 	var cheerio = require('cheerio');
+
 	const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
 
 	var cursos = ['meb', 'miegi', 'miea', 'mesg', 'mib', 'mci', 'lceemg', 'memg', 'miec', 'mieec', 'mieic', 'miem', 'miemm', 'mieq', 'mppu'];
