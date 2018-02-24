@@ -4,6 +4,8 @@
 
 const Nightmare = require('nightmare');
 const waitTimeInterval = 1000;
+const tipo= 'image'
+const url= 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Socken_farbig.jpeg'
 
 listaDeCursos = []
 cursos = undefined
@@ -112,6 +114,14 @@ module.exports = function(bp) {
         bp.db.kvs.set('numero_up', numeroUP)		//Guarda o número UP na DB com o Key Value numero_up
 
 	})
+
+
+	bp.hear({
+        type: /message|text/i,
+        text: /ementa/i
+    },(event, next) => {
+	    bp.messenger.sendAttachment(event.user.id,tipo,url)
+    })
 
 	bp.fallbackHandler = (event, next) => {
 		if(event.type == 'message' || event.type == 'text'){
