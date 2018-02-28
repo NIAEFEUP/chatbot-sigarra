@@ -133,12 +133,12 @@ module.exports = function(bp) {
 
 function mostrarCursos(partes, callback){
 	const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
-	
+
 	//esta parte faz setup ao resto
 	if(listaDeCursos.length == 0){
 		nightmare.goto('https://ni.fe.up.pt/tts/api/courses')
 		.evaluate(function() {
-			return document.body.innerText	
+			return document.body.innerText
 		})
 		.end()
 		.then(function(texto) {
@@ -150,7 +150,7 @@ function mostrarCursos(partes, callback){
 				if(typeof cursos[curso.faculty_id] === 'undefined'){
 					cursos[curso.faculty_id] = new Array();
 					faculdades[curso.faculty_id] = curso.plan_url.substring(curso.plan_url.indexOf('up.pt/')+6, curso.plan_url.indexOf('/pt/cur'))
-					
+
 				}
 				cursos[curso.faculty_id].push( { name: curso.name, acronym : curso.acronym } ); //sera que incluo o tipo??
 			});
@@ -179,11 +179,11 @@ function mostrarCursos(partes, callback){
 					let mensagem = 'Estes sao os cursos disponiveis:\n'
 					cursos[indiceFaculdade].forEach(function(curso) {
 						if((mensagem.length + curso.acronym.length + curso.name.length + 4) <= 300){
-							mensagem += curso.acronym + ' - ' + curso.name + '\n' 
+							mensagem += curso.acronym + ' - ' + curso.name + '\n'
 						}
 						else{
 							callback(mensagem)
-							mensagem = curso.acronym + ' - ' + curso.name + '\n' 
+							mensagem = curso.acronym + ' - ' + curso.name + '\n'
 						}
 					} )
 				}
@@ -205,16 +205,24 @@ function scrapeSigarra(cursoUser, paisUser, callback){
 
 	const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
 
-	var cursos = ['meb', 'miegi', 'miea', 'mesg', 'mib', 'mci', 'lceemg', 'memg', 'miec', 'mieec', 'mieic', 'miem', 'miemm', 'mieq', 'mppu'];
-	cursoUser = cursoUser.toString().toLowerCase();
-	var ncurso = cursos.indexOf(cursoUser);
+	cursoUser = cursoUser.toString().toUpperCase();
 	paisUser = RemoveAccents(paisUser.toString().toLowerCase());
 
-	if (ncurso === -1){
+	let ncurso = -1;
+	let nomeCurso = "";
+	let cursosFeup = cursos[faculdades.indexOf('feup')];
+
+	for (let i = 0; i < cursosFeup.length; i++){
+		if (cursoUser == cursosFeup[i].acronym){
+			nomeCurso = cursosFeup[i].name;
+			break;
+		}
+	}
+
+	if (nomeCurso === ""){
 		callback('Nao existe um curso com essa sigla.\nExemplos: mieic, miem, mieq, ...');
 		return;
 	}
-
 
 	var lista = [];
 
@@ -231,7 +239,16 @@ function scrapeSigarra(cursoUser, paisUser, callback){
 							})
 							.end()  //acabar com o processo do browser
 							.then(function(html) {
+
 								var $ = cheerio.load(html); //fazer load do html para o modulo cheerio
+
+									$('h2', '#conteudoinner').each(function(i, cur){
+										//console.log(cur);
+										if ($(cur).text() === nomeCurso){
+											ncurso = i;
+										}
+									});
+
 									$('.d', $('.dados').eq(ncurso)).each(function(x, elem) { //por cada universidade do curso a chamar a funcao
 										var pais = $('.t.k', elem).eq(0).text(); //pais da universidade
 										pais = pais.replace(/\n/g, "");  //retirar os newline's indesejados
