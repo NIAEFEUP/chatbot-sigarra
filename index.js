@@ -5,7 +5,8 @@
 const Nightmare = require('nightmare');
 const waitTimeInterval = 1000;
 const tipo= 'image'
-const url= 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Socken_farbig.jpeg'
+const url_feup= 'https://i.imgur.com/ACXGsNC.jpg'
+const url_fmup= 'https://i.imgur.com/Xp68s5h.jpg'
 
 listaDeCursos = []
 cursos = undefined
@@ -127,14 +128,14 @@ module.exports = function(bp) {
         type: 'quick_reply',
         text: 'CANTINA_FEUP'
     },(event, next) => {
-        bp.messenger.sendAttachment(event.user.id,tipo,url)
+        bp.messenger.sendAttachment(event.user.id,tipo,url_feup)
 })
 
     bp.hear({
         type: 'quick_reply',
         text: 'CANTINA_FMUP'
     },(event, next) => {
-        bp.messenger.sendAttachment(event.user.id,tipo,url)
+        bp.messenger.sendAttachment(event.user.id,tipo,url_fmup)
 })
 
 	bp.fallbackHandler = (event, next) => {
