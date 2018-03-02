@@ -25,6 +25,16 @@ ajuda:
       moodle: Link para o moodle da FEUP
       erasmus: Informacao acerca das vagas de Erasmus
 
+ementa:
+  - text: Onde vais almoçar?
+    quick_replies:
+      - content_type: text
+        title: cantina feup
+        payload: CANTINA_FEUP
+      - content_type: text
+        title: cantina fmup
+        payload: CANTINA_FMUP
+
 fallback:
   - text: Nao percebi o que quiseste dizer, por favor escrever 'ajuda' para veres tudo o que posso fazer
 

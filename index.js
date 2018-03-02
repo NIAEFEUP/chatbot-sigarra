@@ -116,12 +116,26 @@ module.exports = function(bp) {
 	})
 
 
-	bp.hear({
+    bp.hear({
         type: /message|text/i,
         text: /ementa/i
+    }, (event, next) => {
+        event.reply('#ementa')
+})
+
+    bp.hear({
+        type: 'quick_reply',
+        text: 'CANTINA_FEUP'
     },(event, next) => {
-	    bp.messenger.sendAttachment(event.user.id,tipo,url)
-    })
+        bp.messenger.sendAttachment(event.user.id,tipo,url)
+})
+
+    bp.hear({
+        type: 'quick_reply',
+        text: 'CANTINA_FMUP'
+    },(event, next) => {
+        bp.messenger.sendAttachment(event.user.id,tipo,url)
+})
 
 	bp.fallbackHandler = (event, next) => {
 		if(event.type == 'message' || event.type == 'text'){
