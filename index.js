@@ -13,6 +13,8 @@ listaDeCursos = []
 cursos = undefined
 faculdades = undefined
 
+mostrarCursos(['cursos'], function(){}) // fazer load dos cursos
+
 module.exports = function(bp) {
 
 	bp.middlewares.load()
@@ -28,7 +30,7 @@ module.exports = function(bp) {
 	// Listens for a first message (this is a Regex)
 	// GET_STARTED is the first message you get on Facebook Messenger
 
-	bp.hear(/GET_STARTED|hi|test|hey|holla/i, (event, next) => {
+	bp.hear(/GET_STARTED|test|hey|holla/i, (event, next) => {
     		event.reply('#welcome') // See the file `content.yml` to see the block
   	})
 
@@ -56,36 +58,6 @@ module.exports = function(bp) {
 	}, (event, next) => {
 		console.log(next);
 	  event.reply('#moodle')
-	})
-
-	bp.hear({
-		type: /message|text/i,
-		text: /erasmus (\S+) (.+)/i
-	}, (event, next) => {
-		var curso = event.captured[0];
-		var pais = event.captured[1];
-		scrapeSigarra(curso, pais, function(informacao){
-			for (var i = 0; i < informacao.length; i++){
-				bp.messenger.sendText(event.user.id, String(informacao[i]));
-			}
-		})
-	})
-
-	bp.hear({
-		type: /message|text/i,
-		text: /erasmus (\S+)/i
-	}, (event, next) => {
-		var curso = event.captured[0];
-		scrapeSigarra(curso, "nothing", function(informacao){
-			bp.messenger.sendText(event.user.id, String(informacao));
-		})
-	})
-
-	bp.hear({
-		type: /message|text/i,
-		text: /erasmus/i
-	}, (event, next) => {
-		bp.messenger.sendText(event.user.id, "Lista de paises que suportam o curso:\n> erasmus (sigla curso)\nLista de universidades do pais e do curso com vagas:\n> erasmus (sigla curso) (pais)");
 	})
 
 	bp.hear({
@@ -166,14 +138,14 @@ module.exports = function(bp) {
   })
 
   bp.hear(/hello/i, (event, next) => {
-    
+
     const txt = txt => bp.messenger.createText(event.user.id, txt)
 
     bp.convo.start(event, convo => {
 
       convo.threads['default'].addMessage(txt('Hello!'))
       convo.threads['default'].addQuestion(txt('How are you?'), [
-        { 
+        {
           pattern: utterances.good,
           callback: () => {
             convo.set('feeling', 'good')
@@ -181,7 +153,7 @@ module.exports = function(bp) {
             convo.switchTo('age')
           }
         },
-        { 
+        {
           pattern: utterances.bad,
           callback: () => {
             convo.set('feeling', 'bad')
@@ -238,6 +210,68 @@ module.exports = function(bp) {
 
   })
 
+
+	bp.hear(/erasmus/i, (event, next) => {
+
+    const txt = txt => bp.messenger.createText(event.user.id, txt)
+
+    bp.convo.start(event, convo => {
+
+			convo.threads['default'].addMessage(txt('Para sair desta conversa escreve "cancel".'))
+      convo.threads['default'].addQuestion(txt('Erasmus para que curso? (sigla curso)'), [
+        {
+          pattern: /(\w+)/i,
+          callback: (response) => {
+            convo.set('curso', response.match)
+            convo.switchTo('pais')
+          }
+        },
+        {
+          default: true,
+          callback: () => {
+            convo.say(txt('Desculpa, isso não parece a sigla de um curso'))
+            convo.repeat()
+          }
+        }
+      ])
+
+      convo.createThread('pais')
+      convo.threads['pais'].addQuestion(txt('E para que pais? (Para a lista de paises disponiveis do curso responde "pais")'), [
+        {
+          pattern: /pais/i,
+          callback: (response) => { // Using the response event
+            convo.set('pais', response.text) // Captured group is stored in event
+            convo.say(txt('A procurar pelos paises com erasmus para o curso ' + convo.get('curso')))
+						scrapeSigarra(convo.get('curso'), 'nothing' , function(informacao){convo.say(txt(informacao))})
+            convo.repeat()
+          }
+        },
+        {
+          default: true,
+          callback: (response) => {
+						convo.set('pais', response.text)
+            convo.say(txt(`A procurar por erasmus em ${convo.get('pais')} para o curso ${convo.get('curso')}`))
+						scrapeSigarra(convo.get('curso'), convo.get('pais') , function(informacao){
+								for (let i = 0; i < informacao.length; i++){
+									convo.say(txt(informacao[i]))}})
+            convo.next()
+          }
+        }
+      ])
+
+      convo.on('done', () => {
+        convo.say(txt('Espero que tenha ajudado!'))
+				convo.stop()
+      })
+
+      convo.on('aborted', () => {
+        convo.say(txt('Foi cancelada a procura por erasmus'))
+				convo.stop()
+      })
+
+    })
+
+  })
 
 }
 
@@ -330,7 +364,7 @@ function scrapeSigarra(cursoUser, paisUser, callback){
 	}
 
 	if (nomeCurso === ""){
-		callback('Nao existe um curso com essa sigla.\nExemplos: mieic, miem, mieq, ...');
+		callback(['Nao existe um curso com essa sigla.\nExemplos: mieic, miem, mieq, ...']);
 		return;
 	}
 
@@ -403,7 +437,3 @@ function RemoveAccents(str) {
   }
   return str.join('');
 }
-
-
-
-
