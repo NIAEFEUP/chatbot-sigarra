@@ -9,11 +9,37 @@ const url_feup= 'https://i.imgur.com/ACXGsNC.jpg'
 const url_fmup= 'https://i.imgur.com/Xp68s5h.jpg'
 const _ = require('lodash')
 
+
 listaDeCursos = []
 cursos = undefined
 faculdades = undefined
+cursosCarregados = false
 
-mostrarCursos(['cursos'], function(){}) // fazer load dos cursos
+let nightmareCursos = Nightmare({show: false, waitTimeout: 15000 });
+
+nightmareCursos.goto('https://ni.fe.up.pt/tts/api/courses')
+        .evaluate(function() {
+            return document.body.innerText
+        })
+        .end()
+        .then(function(texto) {
+            listaDeCursos = JSON.parse(texto)
+            cursos = Array(Math.max.apply(Math, listaDeCursos.map(function(curso){return curso.faculty_id;})))
+            faculdades = new Array(cursos.length)
+
+            listaDeCursos.forEach(function(curso){
+                if(typeof cursos[curso.faculty_id] === 'undefined'){
+                    cursos[curso.faculty_id] = new Array();
+                    faculdades[curso.faculty_id] = curso.plan_url.substring(curso.plan_url.indexOf('up.pt/')+6, curso.plan_url.indexOf('/pt/cur'))
+
+                }
+                cursos[curso.faculty_id].push( { name: curso.name, acronym : curso.acronym } ); //sera que incluo o tipo??
+            });
+
+            console.log('Lista de cursos recebida a partir do TTS')
+            console.log('Existem ' + listaDeCursos.length + ' cursos')
+            cursosCarregados = true
+        });
 
 module.exports = function(bp) {
 
@@ -77,7 +103,7 @@ module.exports = function(bp) {
 
 	bp.hear({
 	        type: /message|text/i,
-        text: /up|numero/i
+        text: /numero/i
     }, (event, next) =>{
 		bp.messenger.sendText(event.user.id, 'Por favor escreve "O meu número UP é" seguido do teu número') //Explica como guardar o número Up
 	})
@@ -276,78 +302,57 @@ module.exports = function(bp) {
 }
 
 function mostrarCursos(partes, callback){
-	const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
+	let nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
 
-	//esta parte faz setup ao resto
-	if(listaDeCursos.length == 0){
-		nightmare.goto('https://ni.fe.up.pt/tts/api/courses')
-		.evaluate(function() {
-			return document.body.innerText
-		})
-		.end()
-		.then(function(texto) {
-			listaDeCursos = JSON.parse(texto)
-			cursos = Array(Math.max.apply(Math, listaDeCursos.map(function(curso){return curso.faculty_id;})))
-			faculdades = new Array(cursos.length)
+    if(!cursosCarregados){
+        callback('Ainda nao carreguei os cursos fam squad')
+        return;
+    }
 
-			listaDeCursos.forEach(function(curso){
-				if(typeof cursos[curso.faculty_id] === 'undefined'){
-					cursos[curso.faculty_id] = new Array();
-					faculdades[curso.faculty_id] = curso.plan_url.substring(curso.plan_url.indexOf('up.pt/')+6, curso.plan_url.indexOf('/pt/cur'))
-
-				}
-				cursos[curso.faculty_id].push( { name: curso.name, acronym : curso.acronym } ); //sera que incluo o tipo??
-			});
-
-			console.log('Lista de cursos recebida a partir do TTS')
-			console.log('Existem ' + listaDeCursos.length + ' cursos')
-			callback('Desculpa, volta a mandar a mensagem que nao tinha carregado os cursos!')
-		});
-	}
-	else{
-		switch(partes.length){
-			case 1:
-				callback('Escreve \'cursos faculdade\' para veres os cursos por faculdade')
-				let mensagem_zero = 'Tens disponivel as seguintes:\n'
-				faculdades.forEach(function(faculdade){
-					mensagem_zero += faculdade + '\n'
-				})
-				callback(mensagem_zero)
-				break
-			case 2:
-				let indiceFaculdade = faculdades.indexOf(partes[1])
-				if(indiceFaculdade == -1){
-					callback('Nao conheco a faculdade ' + partes[1] + '\nPor favor tenta outra vez')
-				}
-				else{
-					let mensagem = 'Estes sao os cursos disponiveis:\n'
-					cursos[indiceFaculdade].forEach(function(curso) {
-						if((mensagem.length + curso.acronym.length + curso.name.length + 4) <= 300){
-							mensagem += curso.acronym + ' - ' + curso.name + '\n'
-						}
-						else{
-							callback(mensagem)
-							mensagem = curso.acronym + ' - ' + curso.name + '\n'
-						}
-					} )
-				}
-
+	switch(partes.length){
+		case 1:
+			callback('Escreve \'cursos faculdade\' para veres os cursos por faculdade')
+			let mensagem_zero = 'Tens disponivel as seguintes:\n'
+			faculdades.forEach(function(faculdade){
+				mensagem_zero += faculdade + '\n'
+			})
+			callback(mensagem_zero)
+			break
+		case 2:
+			let indiceFaculdade = faculdades.indexOf(partes[1])
+			if(indiceFaculdade == -1){
+				callback('Nao conheco a faculdade ' + partes[1] + '\nPor favor tenta outra vez')
+			}
+			else{
+				let mensagem = 'Estes sao os cursos disponiveis:\n'
+				cursos[indiceFaculdade].forEach(function(curso) {
+					if((mensagem.length + curso.acronym.length + curso.name.length + 4) <= 300){
+						mensagem += curso.acronym + ' - ' + curso.name + '\n'
+					}
+					else{
+						callback(mensagem)
+						mensagem = curso.acronym + ' - ' + curso.name + '\n'
+					}
+				} )
+			}
 				break
 			default:
 				console.log('lmao')
 
 		}
-
-
-	}
-
 }
+
 
 function scrapeSigarra(cursoUser, paisUser, callback){
 
+    if(!cursosCarregados){
+        callback('Eu gosto e do verao')
+        return;
+    }
+
 	var cheerio = require('cheerio');
 
-	const nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
+	let nightmare = Nightmare({show: false, waitTimeout: 15000 }); //show: mostrar a janela do browser que esta a correr o scraper. waitTimeout: tempo maximo que o scraper pode demorar.
 
 	cursoUser = cursoUser.toString().toUpperCase();
 	paisUser = RemoveAccents(paisUser.toString().toLowerCase());
