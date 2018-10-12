@@ -3,7 +3,7 @@ const
   request = require('request'),
   config = require('config');
 
-// App Secret can be retrieved from the App Dashboard
+//TMP FIX; TODO = encapsulate all these values
 export const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
   process.env.MESSENGER_APP_SECRET :
   config.get('appSecret');
@@ -13,7 +13,10 @@ export const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
   (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
   config.get('pageAccessToken');
 
-export function verifyRequestSignature(req, res, buf) {
+export class Components {
+// App Secret can be retrieved from the App Dashboard
+
+static verifyRequestSignature(req, res, buf) {
   var signature = req.headers["x-hub-signature"];
 
   if (!signature) {
@@ -43,7 +46,7 @@ export function verifyRequestSignature(req, res, buf) {
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/authentication
  *
  */
-export function receivedAuthentication(event) {
+static receivedAuthentication(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfAuth = event.timestamp;
@@ -61,7 +64,7 @@ export function receivedAuthentication(event) {
 
   // When an authentication is received, we'll send a message back to the sender
   // to let them know it was successful.
-  sendTextMessage(senderID, "Authentication successful");
+  this.sendTextMessage(senderID, "Authentication successful");
 }
 
 /*
@@ -78,7 +81,7 @@ export function receivedAuthentication(event) {
  * then we'll simply confirm that we've received the attachment.
  *
  */
-export function receivedMessage(event) {
+static receivedMessage (event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
@@ -120,7 +123,7 @@ export function receivedMessage(event) {
     switch (messageText.replace(/[^\w\s]/gi, '').trim().toLowerCase()) {
       case 'hello':
       case 'hi':
-        sendHiMessage(senderID);
+        this.sendHiMessage(senderID);
         break;
 
       case 'image':
@@ -176,7 +179,7 @@ export function receivedMessage(event) {
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+        this.sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
@@ -191,7 +194,7 @@ export function receivedMessage(event) {
  * these fields at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-delivered
  *
  */
-export function receivedDeliveryConfirmation(event) {
+static receivedDeliveryConfirmation(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var delivery = event.delivery;
@@ -217,7 +220,7 @@ export function receivedDeliveryConfirmation(event) {
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback-received
  *
  */
-export function receivedPostback(event) {
+static receivedPostback(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
@@ -241,7 +244,7 @@ export function receivedPostback(event) {
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-read
  *
  */
-export function receivedMessageRead(event) {
+static receivedMessageRead(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
 
@@ -261,7 +264,7 @@ export function receivedMessageRead(event) {
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/account-linking
  *
  */
-export function receivedAccountLink(event) {
+static receivedAccountLink(event) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
 
@@ -276,7 +279,7 @@ export function receivedAccountLink(event) {
  * If users came here through testdrive, they need to configure the server URL
  * in default.json before they can access local resources likes images/videos.
  */
-export function requiresServerURL(next, [recipientId, ...args]) {
+static requiresServerURL(next, [recipientId, ...args]) {
   if (SERVER_URL === "to_be_set_manually") {
     var messageData = {
       recipient: {
@@ -293,7 +296,7 @@ Once you've finished these steps, try typing “video” or “image”.
       }
     }
 
-    callSendAPI(messageData);
+    this.callSendAPI(messageData);
   } else {
     next.apply(this, [recipientId, ...args]);
   }
@@ -306,7 +309,7 @@ Once you've finished these steps, try typing “video” or “image”.
  * get the message id in a response
  *
  */
-export function callSendAPI(messageData) {
+static callSendAPI(messageData) {
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
@@ -332,7 +335,7 @@ export function callSendAPI(messageData) {
 }
 
 
-export function sendHiMessage(recipientId) {
+static sendHiMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -348,14 +351,14 @@ For more details on how to create commands, go to https://developers.facebook.co
     }
   }
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send an image using the Send API.
  *
  */
-export function sendImageMessage(recipientId) {
+sendImageMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -370,14 +373,14 @@ export function sendImageMessage(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a Gif using the Send API.
  *
  */
-export function sendGifMessage(recipientId) {
+sendGifMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -392,14 +395,14 @@ export function sendGifMessage(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send audio using the Send API.
  *
  */
-export function sendAudioMessage(recipientId) {
+sendAudioMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -414,14 +417,14 @@ export function sendAudioMessage(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a video using the Send API.
  *
  */
-export function sendVideoMessage(recipientId) {
+sendVideoMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -436,14 +439,14 @@ export function sendVideoMessage(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a file using the Send API.
  *
  */
-export function sendFileMessage(recipientId) {
+sendFileMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -458,14 +461,14 @@ export function sendFileMessage(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a text message using the Send API.
  *
  */
-export function sendTextMessage(recipientId, messageText) {
+static sendTextMessage(recipientId, messageText) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -476,14 +479,14 @@ export function sendTextMessage(recipientId, messageText) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a button message using the Send API.
  *
  */
-export function sendButtonMessage(recipientId) {
+ sendButtonMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -512,14 +515,14 @@ export function sendButtonMessage(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+this.callSendAPI(messageData);
 }
 
 /*
  * Send a Structured Message (Generic Message type) using the Send API.
  *
  */
-export function sendGenericMessage(recipientId) {
+ sendGenericMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -563,14 +566,14 @@ export function sendGenericMessage(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a receipt message using the Send API.
  *
  */
-export function sendReceiptMessage(recipientId) {
+ sendReceiptMessage(recipientId) {
   // Generate a random receipt ID as the API requires a unique ID
   var receiptId = "order" + Math.floor(Math.random()*1000);
 
@@ -629,14 +632,14 @@ export function sendReceiptMessage(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a message with Quick Reply buttons.
  *
  */
-export function sendQuickReply(recipientId) {
+ sendQuickReply(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -663,14 +666,14 @@ export function sendQuickReply(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a read receipt to indicate the message has been read
  *
  */
-export function sendReadReceipt(recipientId) {
+ sendReadReceipt(recipientId) {
   console.log("Sending a read receipt to mark message as seen");
 
   var messageData = {
@@ -680,14 +683,14 @@ export function sendReadReceipt(recipientId) {
     sender_action: "mark_seen"
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Turn typing indicator on
  *
  */
-export function sendTypingOn(recipientId) {
+ sendTypingOn(recipientId) {
   console.log("Turning typing indicator on");
 
   var messageData = {
@@ -697,14 +700,14 @@ export function sendTypingOn(recipientId) {
     sender_action: "typing_on"
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Turn typing indicator off
  *
  */
-export function sendTypingOff(recipientId) {
+ sendTypingOff(recipientId) {
   console.log("Turning typing indicator off");
 
   var messageData = {
@@ -714,14 +717,14 @@ export function sendTypingOff(recipientId) {
     sender_action: "typing_off"
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
 }
 
 /*
  * Send a message with the account linking call-to-action
  *
  */
-export function sendAccountLinking(recipientId) {
+ sendAccountLinking(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -741,7 +744,8 @@ export function sendAccountLinking(recipientId) {
     }
   };
 
-  callSendAPI(messageData);
+  this.callSendAPI(messageData);
+}
 }
 
   /**
