@@ -18,20 +18,21 @@ const
   express = require('express'),
   https = require('https');
 
-import { 
-  APP_SECRET, PAGE_ACCESS_TOKEN, verifyRequestSignature, receivedAuthentication, 
-  receivedMessage, receivedDeliveryConfirmation, receivedPostback, 
-  receivedMessageRead, receivedAccountLink, requiresServerURL, callSendAPI, 
-  sendHiMessage, sendImageMessage, sendGifMessage, sendAudioMessage, 
-  sendVideoMessage, sendFileMessage, sendTextMessage, sendButtonMessage, 
-  sendGenericMessage, sendReceiptMessage, sendQuickReply, sendReadReceipt, 
-  sendTypingOn, sendTypingOff, sendAccountLinking 
-} from './components.js';
+////import { 
+//  APP_SECRET, PAGE_ACCESS_TOKEN, verifyRequestSignature, receivedAuthentication, 
+//  receivedMessage, receivedDeliveryConfirmation, receivedPostback, 
+//  receivedMessageRead, receivedAccountLink, requiresServerURL, callSendAPI, 
+//  sendHiMessage, sendImageMessage, sendGifMessage, sendAudioMessage, 
+//  sendVideoMessage, sendFileMessage, sendTextMessage, sendButtonMessage, 
+//  sendGenericMessage, sendReceiptMessage, sendQuickReply, sendReadReceipt, 
+//  sendTypingOn, sendTypingOff, sendAccountLinking 
+//} from './components.js';
+import {Components, APP_SECRET, PAGE_ACCESS_TOKEN} from './components.js';
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
 app.set('view engine', 'ejs');
-app.use(bodyParser.json({ verify: verifyRequestSignature }));
+app.use(bodyParser.json({ verify: Components.verifyRequestSignature }));
 app.use(express.static('public'));
 
 /*
@@ -96,17 +97,17 @@ app.post('/webhook', function (req, res) {
       // Iterate over each messaging event
       pageEntry.messaging.forEach(function(messagingEvent) {
         if (messagingEvent.optin) {
-          receivedAuthentication(messagingEvent);
+          Components.receivedAuthentication(messagingEvent);
         } else if (messagingEvent.message) {
-          receivedMessage(messagingEvent);
+          Components.receivedMessage(messagingEvent);
         } else if (messagingEvent.delivery) {
-          receivedDeliveryConfirmation(messagingEvent);
+          Components.receivedDeliveryConfirmation(messagingEvent);
         } else if (messagingEvent.postback) {
-          receivedPostback(messagingEvent);
+          Components.receivedPostback(messagingEvent);
         } else if (messagingEvent.read) {
-          receivedMessageRead(messagingEvent);
+          Components.receivedMessageRead(messagingEvent);
         } else if (messagingEvent.account_linking) {
-          receivedAccountLink(messagingEvent);
+          Components.receivedAccountLink(messagingEvent);
         } else {
           console.log("Webhook received unknown messagingEvent: ", messagingEvent);
         }
