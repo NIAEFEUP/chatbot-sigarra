@@ -147,7 +147,7 @@ static receivedMessage (event) {
         break;
 
       case 'button':
-        sendButtonMessage(senderID);
+        this.sendButtonMessage(senderID);
         break;
 
       case 'generic':
@@ -159,19 +159,19 @@ static receivedMessage (event) {
         break;
 
       case 'quick reply':
-        sendQuickReply(senderID);
+        this.sendQuickReply(senderID);
         break;
 
       case 'read receipt':
-        sendReadReceipt(senderID);
+        this.sendReadReceipt(senderID);
         break;
 
       case 'typing on':
-        sendTypingOn(senderID);
+        this.sendTypingOn(senderID);
         break;
 
       case 'typing off':
-        sendTypingOff(senderID);
+        this.sendTypingOff(senderID);
         break;
 
       case 'account linking':
@@ -182,7 +182,7 @@ static receivedMessage (event) {
         this.sendTextMessage(senderID, messageText);
     }
   } else if (messageAttachments) {
-    sendTextMessage(senderID, "Message with attachment received");
+    this.sendTextMessage(senderID, "Message with attachment received");
   }
 }
 
@@ -486,7 +486,7 @@ static sendTextMessage(recipientId, messageText) {
  * Send a button message using the Send API.
  *
  */
- sendButtonMessage(recipientId) {
+ static sendButtonMessage(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -639,7 +639,7 @@ this.callSendAPI(messageData);
  * Send a message with Quick Reply buttons.
  *
  */
- sendQuickReply(recipientId) {
+ static sendQuickReply(recipientId) {
   var messageData = {
     recipient: {
       id: recipientId
@@ -673,7 +673,7 @@ this.callSendAPI(messageData);
  * Send a read receipt to indicate the message has been read
  *
  */
- sendReadReceipt(recipientId) {
+ static sendReadReceipt(recipientId) {
   console.log("Sending a read receipt to mark message as seen");
 
   var messageData = {
@@ -690,7 +690,7 @@ this.callSendAPI(messageData);
  * Turn typing indicator on
  *
  */
- sendTypingOn(recipientId) {
+ static sendTypingOn(recipientId) {
   console.log("Turning typing indicator on");
 
   var messageData = {
@@ -707,7 +707,7 @@ this.callSendAPI(messageData);
  * Turn typing indicator off
  *
  */
- sendTypingOff(recipientId) {
+ static sendTypingOff(recipientId) {
   console.log("Turning typing indicator off");
 
   var messageData = {
