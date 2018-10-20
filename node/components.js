@@ -3,6 +3,9 @@ const
   request = require('request'),
   config = require('config');
 
+import {Payloads} from './payloads.js';
+var payloads = new Payloads();
+
 //TMP FIX; TODO = encapsulate all these values
 export const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
   process.env.MESSENGER_APP_SECRET :
@@ -15,6 +18,14 @@ export const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
 
 export class Components {
 // App Secret can be retrieved from the App Dashboard
+
+static init(){
+    //Anything that requires pre-initialization goes here
+    payloads.createMessage('malandrices', 'Que malandrices fazes?');
+    payloads.addOption('malandrices', 'fiz coco', "coco", () => { return 'que nojo'; });
+    payloads.addOption('malandrices', 'fiz xixi', "xixi", () => { return 'que nojice'; });
+
+}
 
 static verifyRequestSignature(req, res, buf) {
   var signature = req.headers["x-hub-signature"];
@@ -111,7 +122,8 @@ static receivedMessage (event) {
     console.log("Quick reply for message %s with payload %s",
       messageId, quickReplyPayload);
 
-    sendTextMessage(senderID, "Quick reply tapped");
+    let response = payloads.dispatcher(quickReplyPayload);
+    this.sendTextMessage(senderID, (response == undefined ? "Quick reply tapped" : response));
     return;
   }
 
@@ -234,7 +246,7 @@ static receivedPostback(event) {
 
   // When a postback is called, we'll send a message back to the sender to
   // let them know it was successful
-  sendTextMessage(senderID, "Postback called");
+  this.sendTextMessage(senderID, "Postback called");
 }
 
 /*
@@ -640,30 +652,14 @@ this.callSendAPI(messageData);
  *
  */
  static sendQuickReply(recipientId) {
+  //Dangerous since there's the change it could be undefined
+  let content = payloads.getMessage('malandrices')
+
   var messageData = {
     recipient: {
       id: recipientId
     },
-    message: {
-      text: "What's your favorite movie genre?",
-      quick_replies: [
-        {
-          "content_type":"text",
-          "title":"Action",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_ACTION"
-        },
-        {
-          "content_type":"text",
-          "title":"Comedy",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_COMEDY"
-        },
-        {
-          "content_type":"text",
-          "title":"Drama",
-          "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_DRAMA"
-        }
-      ]
-    }
+    message: content
   };
 
   this.callSendAPI(messageData);
@@ -747,33 +743,3 @@ this.callSendAPI(messageData);
   this.callSendAPI(messageData);
 }
 }
-
-  /**
-module.exports = {
-  APP_SECRET: APP_SECRET,
-  sendHiMessage: sendHiMessage,
-  verifyRequestSignature: verifyRequestSignature,
-  receivedAuthentication: receivedAuthentication,
-  receivedMessage: receivedMessage,
-  receivedDeliveryConfirmation: receivedDeliveryConfirmation,
-  receivedPostback: receivedPostback,
-  receivedMessageRead: receivedMessageRead,
-  receivedAccountLink: receivedAccountLink,
-  requiresServerURL: requiresServerURL,
-  callSendAPI: callSendAPI,
-  sendHiMessage: sendHiMessage,
-  sendGifMessage: sendGifMessage,
-  sendAudioMessage: sendAudioMessage,
-  sendVideoMessage: sendVideoMessage,
-  sendFileMessage: sendFileMessage,
-  sendTextMessage: sendTextMessage,
-  sendButtonMessage: sendButtonMessage,
-  sendGenericMessage: sendGenericMessage,
-  sendReceiptMessage: sendReceiptMessage,
-  sendQuickReply: sendQuickReply, 
-  sendReadReceipt: sendReadReceipt,
-  sendTypingOn: sendTypingOn,
-  sendTypingOff: sendTypingOff,
-  sendAccountLinking: sendAccountLinking
-}
-*/

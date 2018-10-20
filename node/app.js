@@ -18,16 +18,9 @@ const
   express = require('express'),
   https = require('https');
 
-////import { 
-//  APP_SECRET, PAGE_ACCESS_TOKEN, verifyRequestSignature, receivedAuthentication, 
-//  receivedMessage, receivedDeliveryConfirmation, receivedPostback, 
-//  receivedMessageRead, receivedAccountLink, requiresServerURL, callSendAPI, 
-//  sendHiMessage, sendImageMessage, sendGifMessage, sendAudioMessage, 
-//  sendVideoMessage, sendFileMessage, sendTextMessage, sendButtonMessage, 
-//  sendGenericMessage, sendReceiptMessage, sendQuickReply, sendReadReceipt, 
-//  sendTypingOn, sendTypingOff, sendAccountLinking 
-//} from './components.js';
 import {Components, APP_SECRET, PAGE_ACCESS_TOKEN} from './components.js';
+
+Components.init();
 
 var app = express();
 app.set('port', process.env.PORT || 5000);
