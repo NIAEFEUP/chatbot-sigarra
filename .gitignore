@@ -3,4 +3,3 @@ node_modules/
 .DS_Store
 .swp
 data/
-node/config/
